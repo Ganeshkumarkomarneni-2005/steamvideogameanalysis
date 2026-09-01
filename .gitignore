@@ -1,0 +1,15 @@
+# Python & Virtual Environment
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+.pytest_cache/
+
+# Raw Data and Large CSV Files (exceeding GitHub 100 MB limits)
+*.zip
+data/raw/
+*.csv
+data/processed/*.csv
+models/*.joblib
+models/*.pkl
