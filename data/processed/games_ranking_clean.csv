@@ -1,0 +1,673 @@
+game_name,genre,rank_type,rank,normalized_game_name,rank_clean,title_classification,is_in_games_desc
+Counter-Strike 2,Action,Sales,1,counterstrike 2,1,Base Game Title,True
+"Warhammer 40,000: Space Marine 2",Action,Sales,2,warhammer 40000 space marine 2,2,Base Game Title,True
+Cyberpunk 2077,Action,Sales,3,cyberpunk 2077,3,Base Game Title,True
+Black Myth: Wukong,Action,Sales,4,black myth wukong,4,Base Game Title,True
+ELDEN RING,Action,Sales,5,elden ring,5,Base Game Title,True
+PUBG: BATTLEGROUNDS,Action,Sales,6,pubg battlegrounds,6,Base Game Title,True
+DRAGON BALL: Sparking! ZERO,Action,Sales,7,dragon ball sparking zero,7,Base Game Title,False
+Apex Legends™,Action,Sales,8,apex legends,8,Base Game Title,True
+Dota 2,Action,Sales,9,dota 2,9,Base Game Title,True
+Party Animals,Action,Sales,10,party animals,10,Base Game Title,True
+Total War: WARHAMMER III,Action,Sales,11,total war warhammer iii,11,Base Game Title,True
+Cyberpunk 2077: Phantom Liberty,Action,Sales,12,cyberpunk 2077 phantom liberty,12,Base Game Title,True
+Once Human,Action,Sales,13,once human,13,Base Game Title,True
+NARAKA: BLADEPOINT,Action,Sales,14,naraka bladepoint,14,Base Game Title,True
+Warframe,Action,Sales,15,warframe,15,Base Game Title,True
+Grounded,Action,Sales,16,grounded,16,Base Game Title,True
+Grand Theft Auto V,Action,Sales,17,grand theft auto v,17,Base Game Title,True
+Tom Clancy's Rainbow Six® Siege,Action,Sales,18,tom clancys rainbow six siege,18,Base Game Title,True
+Call of Duty®: Black Ops III,Action,Sales,19,call of duty black ops iii,19,Base Game Title,True
+Like a Dragon: Infinite Wealth,Action,Sales,20,like a dragon infinite wealth,20,Base Game Title,True
+Dead by Daylight,Action,Sales,21,dead by daylight,21,Base Game Title,True
+Call of Duty®,Action,Sales,22,call of duty,22,Base Game Title,True
+The First Descendant,Action,Sales,23,the first descendant,23,Base Game Title,True
+Street Fighter™ 6,Action,Sales,24,street fighter 6,24,Base Game Title,True
+Call of Duty®: Modern Warfare® III - BlackCell (Season 6),Action,Sales,25,call of duty modern warfare iii blackcell season 6,25,Base Game Title,True
+The Crew™ 2,Action,Sales,26,the crew 2,26,Base Game Title,True
+Battlefield™ V,Action,Sales,27,battlefield v,27,Base Game Title,True
+Sea of Thieves: 2024 Edition,Action,Sales,28,sea of thieves 2024 edition,28,DLC / Content / Pass,True
+Halo: The Master Chief Collection,Action,Sales,29,halo the master chief collection,29,Base Game Title,True
+Call of Duty®: Modern Warfare® III,Action,Sales,30,call of duty modern warfare iii,30,Base Game Title,True
+The Witcher 3: Wild Hunt,Action,Sales,31,the witcher 3 wild hunt,31,Base Game Title,True
+LOCKDOWN Protocol,Action,Sales,32,lockdown protocol,32,Base Game Title,True
+Call of Duty®: Warzone™,Action,Sales,33,call of duty warzone,33,Base Game Title,True
+Rust,Action,Sales,34,rust,34,Base Game Title,True
+Dead Rising Deluxe Remaster,Action,Sales,35,dead rising deluxe remaster,35,DLC / Content / Pass,True
+Noita,Action,Sales,36,noita,36,Base Game Title,True
+"Warhammer 40,000: Space Marine 2",Action,Revenue,1,warhammer 40000 space marine 2,1,Base Game Title,True
+Black Myth: Wukong,Action,Revenue,2,black myth wukong,2,Base Game Title,True
+Counter-Strike 2,Action,Revenue,3,counterstrike 2,3,Base Game Title,True
+ELDEN RING,Action,Revenue,4,elden ring,4,Base Game Title,True
+PUBG: BATTLEGROUNDS,Action,Revenue,5,pubg battlegrounds,5,Base Game Title,True
+Cyberpunk 2077,Action,Revenue,6,cyberpunk 2077,6,Base Game Title,True
+Warframe,Action,Revenue,7,warframe,7,Base Game Title,True
+Dota 2,Action,Revenue,8,dota 2,8,Base Game Title,True
+Apex Legends™,Action,Revenue,9,apex legends,9,Base Game Title,True
+Grand Theft Auto V,Action,Revenue,10,grand theft auto v,10,Base Game Title,True
+Once Human,Action,Revenue,11,once human,11,Base Game Title,True
+NARAKA: BLADEPOINT,Action,Revenue,12,naraka bladepoint,12,Base Game Title,True
+Tom Clancy's Rainbow Six® Siege,Action,Revenue,13,tom clancys rainbow six siege,13,Base Game Title,True
+The First Descendant,Action,Revenue,14,the first descendant,14,Base Game Title,True
+Call of Duty®: Black Ops III,Action,Revenue,15,call of duty black ops iii,15,Base Game Title,True
+Cyberpunk 2077: Phantom Liberty,Action,Revenue,16,cyberpunk 2077 phantom liberty,16,Base Game Title,True
+Dead by Daylight,Action,Revenue,17,dead by daylight,17,Base Game Title,True
+ELDEN RING Shadow of the Erdtree,Action,Revenue,18,elden ring shadow of the erdtree,18,Base Game Title,True
+Total War: WARHAMMER III,Action,Revenue,19,total war warhammer iii,19,Base Game Title,True
+Call of Duty®,Action,Revenue,20,call of duty,20,Base Game Title,True
+Street Fighter™ 6,Action,Revenue,21,street fighter 6,21,Base Game Title,True
+Sea of Thieves: 2024 Edition,Action,Revenue,22,sea of thieves 2024 edition,22,DLC / Content / Pass,True
+LOCKDOWN Protocol,Action,Revenue,23,lockdown protocol,23,Base Game Title,True
+The Crew™ 2,Action,Revenue,24,the crew 2,24,Base Game Title,True
+Dead Rising Deluxe Remaster,Action,Revenue,25,dead rising deluxe remaster,25,DLC / Content / Pass,True
+Rust,Action,Revenue,26,rust,26,Base Game Title,True
+Party Animals,Action,Revenue,27,party animals,27,Base Game Title,True
+Call of Duty®: Modern Warfare® III - BlackCell (Season 6),Action,Revenue,28,call of duty modern warfare iii blackcell season 6,28,Base Game Title,True
+Diablo® IV,Action,Revenue,29,diablo iv,29,Base Game Title,True
+FINAL FANTASY XIV Online,Action,Revenue,30,final fantasy xiv online,30,Base Game Title,True
+Destiny 2,Action,Revenue,31,destiny 2,31,Base Game Title,True
+Like a Dragon: Infinite Wealth,Action,Revenue,32,like a dragon infinite wealth,32,Base Game Title,True
+Wallpaper Engine,Action,Revenue,33,wallpaper engine,33,Base Game Title,True
+Team Fortress 2,Action,Revenue,34,team fortress 2,34,Base Game Title,True
+The Elder Scrolls® Online,Action,Revenue,35,the elder scrolls online,35,Base Game Title,True
+Red Dead Redemption 2,Action,Revenue,36,red dead redemption 2,36,Base Game Title,True
+Black Desert,Action,Revenue,37,black desert,37,Base Game Title,True
+DRAGON BALL: Sparking! ZERO,Action,Revenue,38,dragon ball sparking zero,38,Base Game Title,False
+Call of Duty®: Black Ops II,Action,Revenue,39,call of duty black ops ii,39,Base Game Title,True
+Risk of Rain 2,Action,Revenue,40,risk of rain 2,40,Base Game Title,True
+Counter-Strike 2,Action,Review,1,counterstrike 2,1,Base Game Title,True
+Grand Theft Auto V,Action,Review,2,grand theft auto v,2,Base Game Title,True
+Dota 2,Action,Review,3,dota 2,3,Base Game Title,True
+Terraria,Action,Review,4,terraria,4,Base Game Title,True
+Black Myth: Wukong,Action,Review,5,black myth wukong,5,Base Game Title,True
+Wallpaper Engine,Action,Review,6,wallpaper engine,6,Base Game Title,True
+Tom Clancy's Rainbow Six® Siege,Action,Review,7,tom clancys rainbow six siege,7,Base Game Title,True
+Left 4 Dead 2,Action,Review,8,left 4 dead 2,8,Base Game Title,True
+The Witcher 3: Wild Hunt,Action,Review,9,the witcher 3 wild hunt,9,Base Game Title,True
+Team Fortress 2,Action,Review,10,team fortress 2,10,Base Game Title,True
+Rust,Action,Review,11,rust,11,Base Game Title,True
+ELDEN RING,Action,Review,12,elden ring,12,Base Game Title,True
+Red Dead Redemption 2,Action,Review,13,red dead redemption 2,13,Base Game Title,True
+Warframe,Action,Review,14,warframe,14,Base Game Title,True
+The Forest,Action,Review,15,the forest,15,Base Game Title,True
+Among Us,Action,Review,16,among us,16,Base Game Title,True
+Portal 2,Action,Review,17,portal 2,17,Base Game Title,True
+Cyberpunk 2077,Action,Review,18,cyberpunk 2077,18,Base Game Title,True
+Sekiro™: Shadows Die Twice - GOTY Edition,Action,Review,19,sekiro shadows die twice goty edition,19,DLC / Content / Pass,True
+PAYDAY 2,Action,Review,20,payday 2,20,Base Game Title,True
+Dying Light,Action,Review,21,dying light,21,Base Game Title,True
+Hades,Action,Review,22,hades,22,Base Game Title,True
+Counter-Strike,Action,Review,23,counterstrike,23,Base Game Title,False
+Hollow Knight,Action,Review,24,hollow knight,24,Base Game Title,True
+Unturned,Action,Review,25,unturned,25,Base Game Title,True
+Destiny 2,Action,Review,26,destiny 2,26,Base Game Title,True
+Deep Rock Galactic,Action,Review,27,deep rock galactic,27,Base Game Title,True
+Valheim,Action,Review,28,valheim,28,Base Game Title,True
+Borderlands 2,Action,Review,29,borderlands 2,29,Base Game Title,True
+Titanfall® 2,Action,Review,30,titanfall 2,30,Base Game Title,True
+ARK: Survival Evolved,Action,Review,31,ark survival evolved,31,Base Game Title,True
+Vampire Survivors,Action,Review,32,vampire survivors,32,Base Game Title,True
+Dead by Daylight,Action,Review,33,dead by daylight,33,Base Game Title,True
+Devil May Cry 5,Action,Review,34,devil may cry 5,34,Base Game Title,True
+Monster Hunter: World,Action,Review,35,monster hunter world,35,Base Game Title,True
+Sea of Thieves: 2024 Edition,Action,Review,36,sea of thieves 2024 edition,36,DLC / Content / Pass,True
+Half-Life 2,Action,Review,37,halflife 2,37,Base Game Title,True
+Tomb Raider,Action,Review,38,tomb raider,38,Base Game Title,True
+Resident Evil 4,Action,Review,39,resident evil 4,39,Base Game Title,True
+Counter-Strike: Source,Action,Review,40,counterstrike source,40,Base Game Title,False
+"Warhammer 40,000: Space Marine 2",Adventure,Sales,1,warhammer 40000 space marine 2,1,Base Game Title,True
+Black Myth: Wukong,Adventure,Sales,2,black myth wukong,2,Base Game Title,True
+Satisfactory,Adventure,Sales,3,satisfactory,3,Base Game Title,True
+Once Human,Adventure,Sales,4,once human,4,Base Game Title,True
+Baldur's Gate 3,Adventure,Sales,5,baldurs gate 3,5,Base Game Title,True
+Persona 3 Reload,Adventure,Sales,6,persona 3 reload,6,Base Game Title,True
+Grounded,Adventure,Sales,7,grounded,7,Base Game Title,True
+Shin Megami Tensei V: Vengeance,Adventure,Sales,8,shin megami tensei v vengeance,8,Base Game Title,True
+Grand Theft Auto V,Adventure,Sales,9,grand theft auto v,9,Base Game Title,True
+Like a Dragon: Infinite Wealth,Adventure,Sales,10,like a dragon infinite wealth,10,Base Game Title,True
+The First Descendant,Adventure,Sales,11,the first descendant,11,Base Game Title,True
+Street Fighter™ 6,Adventure,Sales,12,street fighter 6,12,Base Game Title,True
+Sea of Thieves: 2024 Edition,Adventure,Sales,13,sea of thieves 2024 edition,13,DLC / Content / Pass,True
+The Witcher 3: Wild Hunt,Adventure,Sales,14,the witcher 3 wild hunt,14,Base Game Title,True
+Rust,Adventure,Sales,15,rust,15,Base Game Title,True
+Dead Rising Deluxe Remaster,Adventure,Sales,16,dead rising deluxe remaster,16,DLC / Content / Pass,True
+Microsoft Flight Simulator 40th Anniversary Edition,Adventure,Sales,17,microsoft flight simulator 40th anniversary edition,17,DLC / Content / Pass,True
+Dragon's Dogma 2,Adventure,Sales,18,dragons dogma 2,18,Base Game Title,True
+Lies of P,Adventure,Sales,19,lies of p,19,Base Game Title,True
+UFO 50,Adventure,Sales,20,ufo 50,20,Base Game Title,True
+FINAL FANTASY VII REMAKE INTERGRADE,Adventure,Sales,21,final fantasy vii remake intergrade,21,Base Game Title,True
+Black Desert,Adventure,Sales,22,black desert,22,Base Game Title,True
+FINAL FANTASY XIV Online,Adventure,Sales,23,final fantasy xiv online,23,Base Game Title,True
+Gunfire Reborn,Adventure,Sales,24,gunfire reborn,24,Base Game Title,True
+Core Keeper,Adventure,Sales,25,core keeper,25,Base Game Title,True
+STAR WARS Jedi: Survivor™,Adventure,Sales,26,star wars jedi survivor,26,Base Game Title,True
+DEATH STRANDING DIRECTOR'S CUT,Adventure,Sales,27,death stranding directors cut,27,Base Game Title,True
+Resident Evil 4,Adventure,Sales,28,resident evil 4,28,Base Game Title,True
+Palworld,Adventure,Sales,29,palworld,29,Base Game Title,True
+Little Nightmares II,Adventure,Sales,30,little nightmares ii,30,Base Game Title,True
+Little Nightmares,Adventure,Sales,31,little nightmares,31,Base Game Title,True
+Sonic Frontiers,Adventure,Sales,32,sonic frontiers,32,Base Game Title,True
+"Warhammer 40,000: Space Marine 2 - Season Pass",Adventure,Sales,33,warhammer 40000 space marine 2 season pass,33,DLC / Content / Pass,True
+Alien: Isolation,Adventure,Sales,34,alien isolation,34,Base Game Title,True
+Lost Judgment,Adventure,Sales,35,lost judgment,35,Base Game Title,True
+ELDEN RING Shadow of the Erdtree,Adventure,Sales,36,elden ring shadow of the erdtree,36,Base Game Title,True
+Lethal Company,Adventure,Sales,37,lethal company,37,Base Game Title,True
+The Elder Scrolls® Online,Adventure,Sales,38,the elder scrolls online,38,Base Game Title,True
+Thank Goodness You're Here!,Adventure,Sales,39,thank goodness youre here,39,Base Game Title,True
+STAR WARS™ Battlefront™ II,Adventure,Sales,40,star wars battlefront ii,40,Base Game Title,True
+"Warhammer 40,000: Space Marine 2",Adventure,Revenue,1,warhammer 40000 space marine 2,1,Base Game Title,True
+Black Myth: Wukong,Adventure,Revenue,2,black myth wukong,2,Base Game Title,True
+Baldur's Gate 3,Adventure,Revenue,3,baldurs gate 3,3,Base Game Title,True
+Satisfactory,Adventure,Revenue,4,satisfactory,4,Base Game Title,True
+Once Human,Adventure,Revenue,5,once human,5,Base Game Title,True
+Grand Theft Auto V,Adventure,Revenue,6,grand theft auto v,6,Base Game Title,True
+Persona 3 Reload,Adventure,Revenue,7,persona 3 reload,7,Base Game Title,True
+Sea of Thieves: 2024 Edition,Adventure,Revenue,8,sea of thieves 2024 edition,8,DLC / Content / Pass,True
+The First Descendant,Adventure,Revenue,9,the first descendant,9,Base Game Title,True
+Rust,Adventure,Revenue,10,rust,10,Base Game Title,True
+Street Fighter™ 6,Adventure,Revenue,11,street fighter 6,11,Base Game Title,True
+Dead Rising Deluxe Remaster,Adventure,Revenue,12,dead rising deluxe remaster,12,DLC / Content / Pass,True
+Shin Megami Tensei V: Vengeance,Adventure,Revenue,13,shin megami tensei v vengeance,13,Base Game Title,True
+FINAL FANTASY XIV Online,Adventure,Revenue,14,final fantasy xiv online,14,Base Game Title,True
+Like a Dragon: Infinite Wealth,Adventure,Revenue,15,like a dragon infinite wealth,15,Base Game Title,True
+Core Keeper,Adventure,Revenue,16,core keeper,16,Base Game Title,True
+The Elder Scrolls® Online,Adventure,Revenue,17,the elder scrolls online,17,Base Game Title,True
+Red Dead Redemption 2,Adventure,Revenue,18,red dead redemption 2,18,Base Game Title,True
+Microsoft Flight Simulator 40th Anniversary Edition,Adventure,Revenue,19,microsoft flight simulator 40th anniversary edition,19,DLC / Content / Pass,True
+Black Desert,Adventure,Revenue,20,black desert,20,Base Game Title,True
+The Witcher 3: Wild Hunt,Adventure,Revenue,21,the witcher 3 wild hunt,21,Base Game Title,True
+Chained Together,Adventure,Revenue,22,chained together,22,Base Game Title,True
+Dragon's Dogma 2,Adventure,Revenue,23,dragons dogma 2,23,Base Game Title,True
+Grounded,Adventure,Revenue,24,grounded,24,Base Game Title,True
+Forza Horizon 5,Adventure,Revenue,25,forza horizon 5,25,Base Game Title,True
+Gunfire Reborn,Adventure,Revenue,26,gunfire reborn,26,Base Game Title,True
+Palworld,Adventure,Revenue,27,palworld,27,Base Game Title,True
+"Warhammer 40,000: Space Marine 2 - Season Pass",Adventure,Revenue,28,warhammer 40000 space marine 2 season pass,28,DLC / Content / Pass,True
+ARK: Survival Ascended,Adventure,Revenue,29,ark survival ascended,29,Base Game Title,True
+ELDEN RING Shadow of the Erdtree,Adventure,Revenue,30,elden ring shadow of the erdtree,30,Base Game Title,True
+Lethal Company,Adventure,Revenue,31,lethal company,31,Base Game Title,True
+Sons Of The Forest,Adventure,Revenue,32,sons of the forest,32,Base Game Title,True
+FINAL FANTASY VII REMAKE INTERGRADE,Adventure,Revenue,33,final fantasy vii remake intergrade,33,Base Game Title,True
+Lies of P,Adventure,Revenue,34,lies of p,34,Base Game Title,True
+Resident Evil 4,Adventure,Revenue,35,resident evil 4,35,Base Game Title,True
+UFO 50,Adventure,Revenue,36,ufo 50,36,Base Game Title,True
+DREDGE,Adventure,Revenue,37,dredge,37,Base Game Title,True
+Crime Scene Cleaner,Adventure,Revenue,38,crime scene cleaner,38,Base Game Title,True
+Thank Goodness You're Here!,Adventure,Revenue,39,thank goodness youre here,39,Base Game Title,True
+STAR WARS Jedi: Survivor™,Adventure,Revenue,40,star wars jedi survivor,40,Base Game Title,True
+Terraria,Adventure,Review,1,terraria,1,Base Game Title,True
+Grand Theft Auto V,Adventure,Review,2,grand theft auto v,2,Base Game Title,True
+The Witcher 3: Wild Hunt,Adventure,Review,3,the witcher 3 wild hunt,3,Base Game Title,True
+Baldur's Gate 3,Adventure,Review,4,baldurs gate 3,4,Base Game Title,True
+Black Myth: Wukong,Adventure,Review,5,black myth wukong,5,Base Game Title,True
+Rust,Adventure,Review,6,rust,6,Base Game Title,True
+The Forest,Adventure,Review,7,the forest,7,Base Game Title,True
+Red Dead Redemption 2,Adventure,Review,8,red dead redemption 2,8,Base Game Title,True
+Lethal Company,Adventure,Review,9,lethal company,9,Base Game Title,True
+Hollow Knight,Adventure,Review,10,hollow knight,10,Base Game Title,True
+Unturned,Adventure,Review,11,unturned,11,Base Game Title,True
+Subnautica,Adventure,Review,12,subnautica,12,Base Game Title,True
+Cyberpunk 2077,Role-Playing,Sales,1,cyberpunk 2077,1,Base Game Title,True
+Black Myth: Wukong,Role-Playing,Sales,2,black myth wukong,2,Base Game Title,True
+ELDEN RING,Role-Playing,Sales,3,elden ring,3,Base Game Title,True
+Dota 2,Role-Playing,Sales,4,dota 2,4,Base Game Title,True
+Crusader Kings III,Role-Playing,Sales,5,crusader kings iii,5,Base Game Title,True
+Cyberpunk 2077: Phantom Liberty,Role-Playing,Sales,6,cyberpunk 2077 phantom liberty,6,Base Game Title,True
+Once Human,Role-Playing,Sales,7,once human,7,Base Game Title,True
+Persona 5 Royal,Role-Playing,Sales,8,persona 5 royal,8,Base Game Title,True
+Baldur's Gate 3,Role-Playing,Sales,9,baldurs gate 3,9,Base Game Title,True
+Persona 3 Reload,Role-Playing,Sales,10,persona 3 reload,10,Base Game Title,True
+Warframe,Role-Playing,Sales,11,warframe,11,Base Game Title,True
+Shin Megami Tensei V: Vengeance,Role-Playing,Sales,12,shin megami tensei v vengeance,12,Base Game Title,True
+Like a Dragon: Infinite Wealth,Role-Playing,Sales,13,like a dragon infinite wealth,13,Base Game Title,True
+The First Descendant,Role-Playing,Sales,14,the first descendant,14,Base Game Title,True
+Street Fighter™ 6,Role-Playing,Sales,15,street fighter 6,15,Base Game Title,True
+The Witcher 3: Wild Hunt,Role-Playing,Sales,16,the witcher 3 wild hunt,16,Base Game Title,True
+Noita,Role-Playing,Sales,17,noita,17,Base Game Title,True
+Dragon's Dogma 2,Role-Playing,Sales,18,dragons dogma 2,18,Base Game Title,True
+SWORD ART ONLINE Fractured Daydream,Role-Playing,Sales,19,sword art online fractured daydream,19,Base Game Title,False
+Lies of P,Role-Playing,Sales,20,lies of p,20,Base Game Title,True
+UFO 50,Role-Playing,Sales,21,ufo 50,21,Base Game Title,True
+FINAL FANTASY VII REMAKE INTERGRADE,Role-Playing,Sales,22,final fantasy vii remake intergrade,22,Base Game Title,True
+Diablo® IV,Role-Playing,Sales,23,diablo iv,23,Base Game Title,True
+Black Desert,Role-Playing,Sales,24,black desert,24,Base Game Title,True
+Persona 3 Reload,Role-Playing,Revenue,1,persona 3 reload,1,Base Game Title,True
+Black Myth: Wukong,Role-Playing,Revenue,2,black myth wukong,2,Base Game Title,True
+Once Human,Role-Playing,Revenue,3,once human,3,Base Game Title,True
+ELDEN RING,Role-Playing,Revenue,4,elden ring,4,Base Game Title,True
+Cyberpunk 2077,Role-Playing,Revenue,5,cyberpunk 2077,5,Base Game Title,True
+Baldur's Gate 3,Role-Playing,Revenue,6,baldurs gate 3,6,Base Game Title,True
+FINAL FANTASY XIV Online,Role-Playing,Revenue,7,final fantasy xiv online,7,Base Game Title,True
+Persona 5 Royal,Role-Playing,Revenue,8,persona 5 royal,8,Base Game Title,True
+Dota 2,Role-Playing,Revenue,9,dota 2,9,Base Game Title,True
+Warframe,Role-Playing,Revenue,10,warframe,10,Base Game Title,True
+Cyberpunk 2077: Phantom Liberty,Role-Playing,Revenue,11,cyberpunk 2077 phantom liberty,11,Base Game Title,True
+The First Descendant,Role-Playing,Revenue,12,the first descendant,12,Base Game Title,True
+The Elder Scrolls® Online,Role-Playing,Revenue,13,the elder scrolls online,13,Base Game Title,True
+Crusader Kings III,Role-Playing,Revenue,14,crusader kings iii,14,Base Game Title,True
+Black Desert,Role-Playing,Revenue,15,black desert,15,Base Game Title,True
+FINAL FANTASY VII REMAKE INTERGRADE,Role-Playing,Revenue,16,final fantasy vii remake intergrade,16,Base Game Title,True
+Diablo® IV,Role-Playing,Revenue,17,diablo iv,17,Base Game Title,True
+Destiny 2,Role-Playing,Revenue,18,destiny 2,18,Base Game Title,True
+Like a Dragon: Infinite Wealth,Role-Playing,Revenue,19,like a dragon infinite wealth,19,Base Game Title,True
+Shin Megami Tensei V: Vengeance,Role-Playing,Revenue,20,shin megami tensei v vengeance,20,Base Game Title,True
+Dale & Dawson Stationery Supplies,Role-Playing,Revenue,21,dale dawson stationery supplies,21,Base Game Title,True
+Street Fighter™ 6,Role-Playing,Revenue,22,street fighter 6,22,Base Game Title,True
+Path of Exile,Role-Playing,Revenue,23,path of exile,23,Base Game Title,True
+The Witcher 3: Wild Hunt,Role-Playing,Revenue,24,the witcher 3 wild hunt,24,Base Game Title,True
+ELDEN RING Shadow of the Erdtree,Role-Playing,Revenue,25,elden ring shadow of the erdtree,25,Base Game Title,True
+Dragon's Dogma 2,Role-Playing,Revenue,26,dragons dogma 2,26,Base Game Title,True
+Stardew Valley,Role-Playing,Revenue,27,stardew valley,27,Base Game Title,True
+STAR WARS™: The Old Republic™,Role-Playing,Revenue,28,star wars the old republic,28,Base Game Title,True
+Gunfire Reborn,Role-Playing,Revenue,29,gunfire reborn,29,Base Game Title,True
+Lies of P,Role-Playing,Revenue,30,lies of p,30,Base Game Title,True
+Fallout 76,Role-Playing,Revenue,31,fallout 76,31,Base Game Title,True
+Palworld,Role-Playing,Revenue,32,palworld,32,Base Game Title,True
+Monster Hunter: World,Role-Playing,Revenue,33,monster hunter world,33,Base Game Title,True
+Project Zomboid,Role-Playing,Revenue,34,project zomboid,34,Base Game Title,True
+"Warhammer 40,000: Space Marine 2 - Season Pass",Role-Playing,Revenue,35,warhammer 40000 space marine 2 season pass,35,DLC / Content / Pass,True
+Dark and Darker,Role-Playing,Revenue,36,dark and darker,36,Base Game Title,True
+UFO 50,Role-Playing,Revenue,37,ufo 50,37,Base Game Title,True
+Visions of Mana,Role-Playing,Revenue,38,visions of mana,38,Base Game Title,True
+Limbus Company,Role-Playing,Revenue,39,limbus company,39,Base Game Title,True
+Noita,Role-Playing,Revenue,40,noita,40,Base Game Title,True
+Dota 2,Role-Playing,Review,1,dota 2,1,Base Game Title,True
+The Witcher 3: Wild Hunt,Role-Playing,Review,2,the witcher 3 wild hunt,2,Base Game Title,True
+Black Myth: Wukong,Role-Playing,Review,3,black myth wukong,3,Base Game Title,True
+Baldur's Gate 3,Role-Playing,Review,4,baldurs gate 3,4,Base Game Title,True
+Stardew Valley,Role-Playing,Review,5,stardew valley,5,Base Game Title,True
+ELDEN RING,Role-Playing,Review,6,elden ring,6,Base Game Title,True
+Divinity: Original Sin 2 - Definitive Edition,Role-Playing,Review,7,divinity original sin 2 definitive edition,7,DLC / Content / Pass,True
+Warframe,Role-Playing,Review,8,warframe,8,Base Game Title,True
+Cyberpunk 2077,Role-Playing,Review,9,cyberpunk 2077,9,Base Game Title,True
+Destiny 2,Role-Playing,Review,10,destiny 2,10,Base Game Title,True
+Monster Hunter: World,Role-Playing,Review,11,monster hunter world,11,Base Game Title,True
+Hades,Role-Playing,Review,12,hades,12,Base Game Title,True
+Vampire Survivors,Role-Playing,Review,13,vampire survivors,13,Base Game Title,True
+Path of Exile,Role-Playing,Review,14,path of exile,14,Base Game Title,True
+Borderlands 2,Role-Playing,Review,15,borderlands 2,15,Base Game Title,True
+Fallout: New Vegas,Role-Playing,Review,16,fallout new vegas,16,Base Game Title,True
+STAR WARS™: The Old Republic™,Role-Playing,Review,17,star wars the old republic,17,Base Game Title,True
+Undertale,Role-Playing,Review,18,undertale,18,Base Game Title,True
+Persona 4 Golden,Role-Playing,Review,19,persona 4 golden,19,Base Game Title,True
+DARK SOULS™ III,Role-Playing,Review,20,dark souls iii,20,Base Game Title,True
+Persona 5 Royal,Role-Playing,Review,21,persona 5 royal,21,Base Game Title,True
+FINAL FANTASY XIV Online,Role-Playing,Review,22,final fantasy xiv online,22,Base Game Title,True
+Palworld,Role-Playing,Review,23,palworld,23,Base Game Title,True
+Project Zomboid,Role-Playing,Review,24,project zomboid,24,Base Game Title,True
+The Elder Scrolls® Online,Role-Playing,Review,25,the elder scrolls online,25,Base Game Title,True
+Hogwarts Legacy,Role-Playing,Review,26,hogwarts legacy,26,Base Game Title,True
+OMORI,Role-Playing,Review,27,omori,27,Base Game Title,True
+Slay the Spire,Role-Playing,Review,28,slay the spire,28,Base Game Title,True
+Symphony of War: The Nephilim Saga,Role-Playing,Review,29,symphony of war the nephilim saga,29,Base Game Title,True
+God of War,Role-Playing,Review,30,god of war,30,Base Game Title,True
+Fallout 4,Role-Playing,Review,31,fallout 4,31,Base Game Title,True
+TROUBLESHOOTER: Abandoned Children,Role-Playing,Review,32,troubleshooter abandoned children,32,Base Game Title,True
+Persona 3 Reload,Role-Playing,Review,33,persona 3 reload,33,Base Game Title,True
+DAVE THE DIVER,Role-Playing,Review,34,dave the diver,34,Base Game Title,True
+The Elder Scrolls V: Skyrim Special Edition,Role-Playing,Review,35,the elder scrolls v skyrim special edition,35,DLC / Content / Pass,True
+FINAL FANTASY VII REMAKE INTERGRADE,Role-Playing,Review,36,final fantasy vii remake intergrade,36,Base Game Title,True
+Yakuza 0,Role-Playing,Review,37,yakuza 0,37,Base Game Title,True
+Mount & Blade: Warband,Role-Playing,Review,38,mount blade warband,38,Base Game Title,True
+Mount & Blade II: Bannerlord,Role-Playing,Review,39,mount blade ii bannerlord,39,Base Game Title,True
+Kenshi,Role-Playing,Review,40,kenshi,40,Base Game Title,True
+EA SPORTS FC™ 25,Simulation,Sales,1,ea sports fc 25,1,Base Game Title,True
+Frostpunk 2,Simulation,Sales,2,frostpunk 2,2,Base Game Title,True
+TCG Card Shop Simulator,Simulation,Sales,3,tcg card shop simulator,3,Base Game Title,True
+Satisfactory,Simulation,Sales,4,satisfactory,4,Base Game Title,True
+NBA 2K25,Simulation,Sales,5,nba 2k25,5,Base Game Title,True
+Crusader Kings III,Simulation,Sales,6,crusader kings iii,6,Base Game Title,True
+Once Human,Simulation,Sales,7,once human,7,Base Game Title,True
+The Sims™ 4,Simulation,Sales,8,the sims 4,8,Base Game Title,True
+War Thunder,Simulation,Sales,9,war thunder,9,Base Game Title,True
+Euro Truck Simulator 2,Simulation,Sales,10,euro truck simulator 2,10,Base Game Title,True
+American Truck Simulator,Simulation,Sales,11,american truck simulator,11,Base Game Title,True
+Anno 1800,Simulation,Sales,12,anno 1800,12,Base Game Title,True
+Microsoft Flight Simulator 40th Anniversary Edition,Simulation,Sales,13,microsoft flight simulator 40th anniversary edition,13,DLC / Content / Pass,True
+Yu-Gi-Oh! Master Duel,Simulation,Sales,14,yugioh master duel,14,Base Game Title,True
+BeamNG.drive,Simulation,Sales,15,beamngdrive,15,Base Game Title,True
+eFootball™,Simulation,Sales,16,efootball,16,Base Game Title,True
+Stardew Valley,Simulation,Sales,17,stardew valley,17,Base Game Title,True
+Two Point Campus,Simulation,Sales,18,two point campus,18,Base Game Title,True
+Assetto Corsa,Simulation,Sales,19,assetto corsa,19,Base Game Title,True
+Project Zomboid,Simulation,Sales,20,project zomboid,20,Base Game Title,True
+Chained Together,Simulation,Sales,21,chained together,21,Base Game Title,True
+Forza Horizon 5,Simulation,Sales,22,forza horizon 5,22,Base Game Title,True
+EA SPORTS™ Madden NFL 25,Simulation,Sales,23,ea sports madden nfl 25,23,Base Game Title,True
+DREDGE,Simulation,Sales,24,dredge,24,Base Game Title,True
+RimWorld,Simulation,Sales,25,rimworld,25,Base Game Title,True
+theHunter: Call of the Wild™,Simulation,Sales,26,thehunter call of the wild,26,Base Game Title,True
+Shawarma Legend,Simulation,Sales,27,shawarma legend,27,Base Game Title,True
+Stellaris,Simulation,Sales,28,stellaris,28,Base Game Title,True
+World of Warships,Simulation,Sales,29,world of warships,29,Base Game Title,True
+Assetto Corsa Competizione,Simulation,Sales,30,assetto corsa competizione,30,Base Game Title,True
+World of Tanks,Simulation,Sales,31,world of tanks,31,Base Game Title,True
+Dyson Sphere Program,Simulation,Sales,32,dyson sphere program,32,Base Game Title,True
+Crime Scene Cleaner,Simulation,Sales,33,crime scene cleaner,33,Base Game Title,True
+Jurassic World Evolution 2,Simulation,Sales,34,jurassic world evolution 2,34,Base Game Title,True
+DCS World Steam Edition,Simulation,Sales,35,dcs world steam edition,35,DLC / Content / Pass,True
+American Truck Simulator - Arkansas,Simulation,Sales,36,american truck simulator arkansas,36,Base Game Title,True
+Train Sim World® 5,Simulation,Sales,37,train sim world 5,37,Base Game Title,True
+Crusader Kings III: Tours & Tournaments,Simulation,Sales,38,crusader kings iii tours tournaments,38,Base Game Title,True
+Cities: Skylines II,Simulation,Sales,39,cities skylines ii,39,Base Game Title,True
+Farming Simulator 25,Simulation,Sales,40,farming simulator 25,40,Base Game Title,False
+EA SPORTS FC™ 25,Simulation,Revenue,1,ea sports fc 25,1,Base Game Title,True
+Frostpunk 2,Simulation,Revenue,2,frostpunk 2,2,Base Game Title,True
+TCG Card Shop Simulator,Simulation,Revenue,3,tcg card shop simulator,3,Base Game Title,True
+NBA 2K25,Simulation,Revenue,4,nba 2k25,4,Base Game Title,True
+War Thunder,Simulation,Revenue,5,war thunder,5,Base Game Title,True
+Satisfactory,Simulation,Revenue,6,satisfactory,6,Base Game Title,True
+The Sims™ 4,Simulation,Revenue,7,the sims 4,7,Base Game Title,True
+Crusader Kings III,Simulation,Revenue,8,crusader kings iii,8,Base Game Title,True
+Euro Truck Simulator 2,Simulation,Revenue,9,euro truck simulator 2,9,Base Game Title,True
+Once Human,Simulation,Revenue,10,once human,10,Base Game Title,True
+American Truck Simulator,Simulation,Revenue,11,american truck simulator,11,Base Game Title,True
+Microsoft Flight Simulator 40th Anniversary Edition,Simulation,Revenue,12,microsoft flight simulator 40th anniversary edition,12,DLC / Content / Pass,True
+BeamNG.drive,Simulation,Revenue,13,beamngdrive,13,Base Game Title,True
+Yu-Gi-Oh! Master Duel,Simulation,Revenue,14,yugioh master duel,14,Base Game Title,True
+Stardew Valley,Simulation,Revenue,15,stardew valley,15,Base Game Title,True
+Anno 1800,Simulation,Revenue,16,anno 1800,16,Base Game Title,True
+Chained Together,Simulation,Revenue,17,chained together,17,Base Game Title,True
+Forza Horizon 5,Simulation,Revenue,18,forza horizon 5,18,Base Game Title,True
+EA SPORTS™ Madden NFL 25,Simulation,Revenue,19,ea sports madden nfl 25,19,Base Game Title,True
+Stellaris,Simulation,Revenue,20,stellaris,20,Base Game Title,True
+eFootball™,Simulation,Revenue,21,efootball,21,Base Game Title,True
+Crime Scene Cleaner,Simulation,Revenue,22,crime scene cleaner,22,Base Game Title,True
+Assetto Corsa,Simulation,Revenue,23,assetto corsa,23,Base Game Title,True
+Project Zomboid,Simulation,Revenue,24,project zomboid,24,Base Game Title,True
+RimWorld,Simulation,Revenue,25,rimworld,25,Base Game Title,True
+DREDGE,Simulation,Revenue,26,dredge,26,Base Game Title,True
+Fields of Mistria,Simulation,Revenue,27,fields of mistria,27,Base Game Title,True
+World of Warships,Simulation,Revenue,28,world of warships,28,Base Game Title,True
+Supermarket Simulator,Simulation,Revenue,29,supermarket simulator,29,Base Game Title,True
+Cities: Skylines II,Simulation,Revenue,30,cities skylines ii,30,Base Game Title,True
+theHunter: Call of the Wild™,Simulation,Revenue,31,thehunter call of the wild,31,Base Game Title,True
+CarX Street,Simulation,Revenue,32,carx street,32,Base Game Title,True
+Hearts of Iron IV,Simulation,Revenue,33,hearts of iron iv,33,Base Game Title,True
+DCS World Steam Edition,Simulation,Revenue,34,dcs world steam edition,34,DLC / Content / Pass,True
+Two Point Campus,Simulation,Revenue,35,two point campus,35,Base Game Title,True
+Train Sim World® 5,Simulation,Revenue,36,train sim world 5,36,Base Game Title,True
+Assetto Corsa Competizione,Simulation,Revenue,37,assetto corsa competizione,37,Base Game Title,True
+shapez 2,Simulation,Revenue,38,shapez 2,38,Base Game Title,True
+Ale & Tale Tavern,Simulation,Revenue,39,ale tale tavern,39,Base Game Title,True
+7 Days to Die,Simulation,Revenue,40,7 days to die,40,Base Game Title,True
+Garry's Mod,Simulation,Review,1,garrys mod,1,Base Game Title,True
+Stardew Valley,Simulation,Review,2,stardew valley,2,Base Game Title,True
+Euro Truck Simulator 2,Simulation,Review,3,euro truck simulator 2,3,Base Game Title,True
+The Forest,Simulation,Review,4,the forest,4,Base Game Title,True
+BeamNG.drive,Simulation,Review,5,beamngdrive,5,Base Game Title,True
+People Playground,Simulation,Review,6,people playground,6,Base Game Title,True
+RimWorld,Simulation,Review,7,rimworld,7,Base Game Title,True
+Cities: Skylines,Simulation,Review,8,cities skylines,8,Base Game Title,True
+American Truck Simulator,Simulation,Review,9,american truck simulator,9,Base Game Title,True
+Totally Accurate Battle Simulator,Simulation,Review,10,totally accurate battle simulator,10,Base Game Title,True
+Satisfactory,Simulation,Review,11,satisfactory,11,Base Game Title,True
+Kerbal Space Program,Simulation,Review,12,kerbal space program,12,Base Game Title,True
+Project Zomboid,Simulation,Review,13,project zomboid,13,Base Game Title,True
+Arma 3,Simulation,Review,14,arma 3,14,Base Game Title,True
+DAVE THE DIVER,Simulation,Review,15,dave the diver,15,Base Game Title,True
+7 Days to Die,Simulation,Review,16,7 days to die,16,Base Game Title,True
+Oxygen Not Included,Simulation,Review,17,oxygen not included,17,Base Game Title,True
+Hearts of Iron IV,Simulation,Review,18,hearts of iron iv,18,Base Game Title,True
+Dyson Sphere Program,Simulation,Review,19,dyson sphere program,19,Base Game Title,True
+"Papers, Please",Simulation,Review,20,papers please,20,Base Game Title,True
+Sid Meier’s Civilization® VI,Simulation,Review,21,sid meiers civilization vi,21,Base Game Title,True
+Teardown,Simulation,Review,22,teardown,22,Base Game Title,True
+CarX Drift Racing Online,Simulation,Review,23,carx drift racing online,23,Base Game Title,True
+Forza Horizon 5,Simulation,Review,24,forza horizon 5,24,Base Game Title,True
+Assetto Corsa,Simulation,Review,25,assetto corsa,25,Base Game Title,True
+Game Dev Tycoon,Simulation,Review,26,game dev tycoon,26,Base Game Title,True
+Slime Rancher,Simulation,Review,27,slime rancher,27,Base Game Title,True
+Car Mechanic Simulator 2021,Simulation,Review,28,car mechanic simulator 2021,28,Base Game Title,True
+The Sims™ 4,Simulation,Review,29,the sims 4,29,Base Game Title,True
+Mount & Blade II: Bannerlord,Simulation,Review,30,mount blade ii bannerlord,30,Base Game Title,True
+Stellaris,Simulation,Review,31,stellaris,31,Base Game Title,True
+Supermarket Simulator,Simulation,Review,32,supermarket simulator,32,Base Game Title,True
+Tabletop Simulator,Simulation,Review,33,tabletop simulator,33,Base Game Title,True
+PowerWash Simulator,Simulation,Review,34,powerwash simulator,34,Base Game Title,True
+theHunter: Call of the Wild™,Simulation,Review,35,thehunter call of the wild,35,Base Game Title,True
+Aimlabs,Simulation,Review,36,aimlabs,36,Base Game Title,True
+My Summer Car,Simulation,Review,37,my summer car,37,Base Game Title,True
+House Flipper,Simulation,Review,38,house flipper,38,Base Game Title,True
+Plague Inc: Evolved,Simulation,Review,39,plague inc evolved,39,Base Game Title,True
+Kenshi,Simulation,Review,40,kenshi,40,Base Game Title,True
+Frostpunk 2,Strategy,Sales,1,frostpunk 2,1,Base Game Title,True
+TCG Card Shop Simulator,Strategy,Sales,2,tcg card shop simulator,2,Base Game Title,True
+Dota 2,Strategy,Sales,3,dota 2,3,Base Game Title,True
+Total War: WARHAMMER III,Strategy,Sales,4,total war warhammer iii,4,Base Game Title,True
+Crusader Kings III,Strategy,Sales,5,crusader kings iii,5,Base Game Title,True
+Persona 5 Royal,Strategy,Sales,6,persona 5 royal,6,Base Game Title,True
+Persona 3 Reload,Strategy,Sales,7,persona 3 reload,7,Base Game Title,True
+Shin Megami Tensei V: Vengeance,Strategy,Sales,8,shin megami tensei v vengeance,8,Base Game Title,True
+Age of Mythology: Retold,Strategy,Sales,9,age of mythology retold,9,Base Game Title,True
+Anno 1800,Strategy,Sales,10,anno 1800,10,Base Game Title,True
+Yu-Gi-Oh! Master Duel,Strategy,Sales,11,yugioh master duel,11,Base Game Title,True
+Magic: The Gathering Arena,Strategy,Sales,12,magic the gathering arena,12,Base Game Title,True
+Total War: WARHAMMER II,Strategy,Sales,13,total war warhammer ii,13,Base Game Title,True
+Two Point Campus,Strategy,Sales,14,two point campus,14,Base Game Title,True
+Ara: History Untold,Strategy,Sales,15,ara history untold,15,Base Game Title,False
+Total War: WARHAMMER,Strategy,Sales,16,total war warhammer,16,Base Game Title,True
+Metaphor: ReFantazio,Strategy,Sales,17,metaphor refantazio,17,Base Game Title,False
+RimWorld,Strategy,Sales,18,rimworld,18,Base Game Title,True
+Stellaris,Strategy,Sales,19,stellaris,19,Base Game Title,True
+Total War: WARHAMMER III - Shadows of Change,Strategy,Sales,20,total war warhammer iii shadows of change,20,Base Game Title,True
+Dyson Sphere Program,Strategy,Sales,21,dyson sphere program,21,Base Game Title,True
+Total War: THREE KINGDOMS,Strategy,Sales,22,total war three kingdoms,22,Base Game Title,True
+Jurassic World Evolution 2,Strategy,Sales,23,jurassic world evolution 2,23,Base Game Title,True
+Cities: Skylines II,Strategy,Sales,24,cities skylines ii,24,Base Game Title,True
+Hearts of Iron IV,Strategy,Sales,25,hearts of iron iv,25,Base Game Title,True
+Total War: PHARAOH,Strategy,Sales,26,total war pharaoh,26,Base Game Title,True
+Inscryption,Strategy,Sales,27,inscryption,27,Base Game Title,True
+Two Point Hospital,Strategy,Sales,28,two point hospital,28,Base Game Title,True
+Company of Heroes 3,Strategy,Sales,29,company of heroes 3,29,Base Game Title,True
+Total War: ROME II - Emperor Edition,Strategy,Sales,30,total war rome ii emperor edition,30,DLC / Content / Pass,True
+Bloons TD 6,Strategy,Sales,31,bloons td 6,31,Base Game Title,True
+Manor Lords,Strategy,Sales,32,manor lords,32,Base Game Title,True
+Limbus Company,Strategy,Sales,33,limbus company,33,Base Game Title,True
+Persona 4 Golden,Strategy,Sales,34,persona 4 golden,34,Base Game Title,True
+Planet Coaster 2,Strategy,Sales,35,planet coaster 2,35,Base Game Title,False
+Transport Fever 2,Strategy,Sales,36,transport fever 2,36,Base Game Title,True
+Sid Meier's Civilization® VII,Strategy,Sales,37,sid meiers civilization vii,37,Base Game Title,False
+"Warhammer 40,000: Rogue Trader",Strategy,Sales,38,warhammer 40000 rogue trader,38,Base Game Title,True
+Sid Meier’s Civilization® VI,Strategy,Sales,39,sid meiers civilization vi,39,Base Game Title,True
+Stolen Realm,Strategy,Sales,40,stolen realm,40,Base Game Title,True
+Crusader Kings III,Strategy,Revenue,1,crusader kings iii,1,Base Game Title,True
+Total War: WARHAMMER III,Strategy,Revenue,2,total war warhammer iii,2,Base Game Title,True
+Dota 2,Strategy,Revenue,3,dota 2,3,Base Game Title,True
+Frostpunk 2,Strategy,Revenue,4,frostpunk 2,4,Base Game Title,True
+Persona 3 Reload,Strategy,Revenue,5,persona 3 reload,5,Base Game Title,True
+TCG Card Shop Simulator,Strategy,Revenue,6,tcg card shop simulator,6,Base Game Title,True
+Age of Mythology: Retold,Strategy,Revenue,7,age of mythology retold,7,Base Game Title,True
+Persona 5 Royal,Strategy,Revenue,8,persona 5 royal,8,Base Game Title,True
+Yu-Gi-Oh! Master Duel,Strategy,Revenue,9,yugioh master duel,9,Base Game Title,True
+Magic: The Gathering Arena,Strategy,Revenue,10,magic the gathering arena,10,Base Game Title,True
+Sid Meier’s Civilization® VI,Strategy,Revenue,11,sid meiers civilization vi,11,Base Game Title,True
+Total War: WARHAMMER II,Strategy,Revenue,12,total war warhammer ii,12,Base Game Title,True
+Stellaris,Strategy,Revenue,13,stellaris,13,Base Game Title,True
+Shin Megami Tensei V: Vengeance,Strategy,Revenue,14,shin megami tensei v vengeance,14,Base Game Title,True
+Anno 1800,Strategy,Revenue,15,anno 1800,15,Base Game Title,True
+Hearts of Iron IV,Strategy,Revenue,16,hearts of iron iv,16,Base Game Title,True
+Total War: PHARAOH,Strategy,Revenue,17,total war pharaoh,17,Base Game Title,True
+Manor Lords,Strategy,Revenue,18,manor lords,18,Base Game Title,True
+Sins of a Solar Empire II,Strategy,Revenue,19,sins of a solar empire ii,19,Base Game Title,True
+Total War: WARHAMMER,Strategy,Revenue,20,total war warhammer,20,Base Game Title,True
+RimWorld,Strategy,Revenue,21,rimworld,21,Base Game Title,True
+Limbus Company,Strategy,Revenue,22,limbus company,22,Base Game Title,True
+Sid Meier's Civilization® VII,Strategy,Revenue,23,sid meiers civilization vii,23,Base Game Title,False
+Summoners War,Strategy,Revenue,24,summoners war,24,Base Game Title,True
+Cities: Skylines II,Strategy,Revenue,25,cities skylines ii,25,Base Game Title,True
+Total War: THREE KINGDOMS,Strategy,Revenue,26,total war three kingdoms,26,Base Game Title,True
+Two Point Campus,Strategy,Revenue,27,two point campus,27,Base Game Title,True
+Bloons TD 6,Strategy,Revenue,28,bloons td 6,28,Base Game Title,True
+Frostpunk,Strategy,Revenue,29,frostpunk,29,Base Game Title,True
+Tabletop Simulator,Strategy,Revenue,30,tabletop simulator,30,Base Game Title,True
+Total War: ROME II - Emperor Edition,Strategy,Revenue,31,total war rome ii emperor edition,31,DLC / Content / Pass,True
+Jurassic World Evolution 2,Strategy,Revenue,32,jurassic world evolution 2,32,Base Game Title,True
+Age of Empires IV: Anniversary Edition,Strategy,Revenue,33,age of empires iv anniversary edition,33,DLC / Content / Pass,True
+Europa Universalis IV,Strategy,Revenue,34,europa universalis iv,34,Base Game Title,True
+Balatro,Strategy,Revenue,35,balatro,35,Base Game Title,True
+Age of Empires II: Definitive Edition,Strategy,Revenue,36,age of empires ii definitive edition,36,DLC / Content / Pass,True
+"Warhammer 40,000: Rogue Trader",Strategy,Revenue,37,warhammer 40000 rogue trader,37,Base Game Title,True
+MARVEL SNAP,Strategy,Revenue,38,marvel snap,38,Base Game Title,True
+Inscryption,Strategy,Revenue,39,inscryption,39,Base Game Title,True
+Tactical Breach Wizards,Strategy,Revenue,40,tactical breach wizards,40,Base Game Title,True
+Dota 2,Strategy,Review,1,dota 2,1,Base Game Title,True
+Sid Meier’s Civilization® VI,Strategy,Review,2,sid meiers civilization vi,2,Base Game Title,True
+Sid Meier's Civilization® V,Strategy,Review,3,sid meiers civilization v,3,Base Game Title,True
+Bloons TD 6,Strategy,Review,4,bloons td 6,4,Base Game Title,True
+Hearts of Iron IV,Strategy,Review,5,hearts of iron iv,5,Base Game Title,True
+Divinity: Original Sin 2 - Definitive Edition,Strategy,Review,6,divinity original sin 2 definitive edition,6,DLC / Content / Pass,True
+RimWorld,Strategy,Review,7,rimworld,7,Base Game Title,True
+Total War: WARHAMMER II,Strategy,Review,8,total war warhammer ii,8,Base Game Title,True
+Tabletop Simulator,Strategy,Review,9,tabletop simulator,9,Base Game Title,True
+Crusader Kings III,Strategy,Review,10,crusader kings iii,10,Base Game Title,True
+Slay the Spire,Strategy,Review,11,slay the spire,11,Base Game Title,True
+Total War: MEDIEVAL II – Definitive Edition,Strategy,Review,12,total war medieval ii definitive edition,12,DLC / Content / Pass,True
+Age of Empires II: Definitive Edition,Strategy,Review,13,age of empires ii definitive edition,13,DLC / Content / Pass,True
+Stellaris,Strategy,Review,14,stellaris,14,Base Game Title,True
+Inscryption,Strategy,Review,15,inscryption,15,Base Game Title,True
+Plants vs. Zombies GOTY Edition,Strategy,Review,16,plants vs zombies goty edition,16,DLC / Content / Pass,True
+Kenshi,Strategy,Review,17,kenshi,17,Base Game Title,True
+Cities: Skylines,Strategy,Review,18,cities skylines,18,Base Game Title,True
+Age of Empires II (Retired),Strategy,Review,19,age of empires ii retired,19,Base Game Title,True
+Dyson Sphere Program,Strategy,Review,20,dyson sphere program,20,Base Game Title,True
+Ultimate General: Civil War,Strategy,Review,21,ultimate general civil war,21,Base Game Title,True
+Dune: Imperium,Strategy,Review,22,dune imperium,22,Base Game Title,True
+For The King,Strategy,Review,23,for the king,23,Base Game Title,True
+STAR WARS™ Empire at War - Gold Pack,Strategy,Review,24,star wars empire at war gold pack,24,DLC / Content / Pass,True
+Armello,Strategy,Review,25,armello,25,Base Game Title,True
+Stacklands,Strategy,Review,26,stacklands,26,Base Game Title,True
+Balatro,Strategy,Review,27,balatro,27,Base Game Title,True
+Manor Lords,Strategy,Review,28,manor lords,28,Base Game Title,True
+Europa Universalis IV,Strategy,Review,29,europa universalis iv,29,Base Game Title,True
+ENDLESS™ Legend,Strategy,Review,30,endless legend,30,Base Game Title,True
+Dorfromantik,Strategy,Review,31,dorfromantik,31,Base Game Title,True
+Total War: ROME II - Emperor Edition,Strategy,Review,32,total war rome ii emperor edition,32,DLC / Content / Pass,True
+"Warhammer 40,000: Gladius - Relics of War",Strategy,Review,33,warhammer 40000 gladius relics of war,33,Base Game Title,True
+Frostpunk,Strategy,Review,34,frostpunk,34,Base Game Title,True
+Northgard,Strategy,Review,35,northgard,35,Base Game Title,True
+Age of Wonders 4,Strategy,Review,36,age of wonders 4,36,Base Game Title,True
+Persona 4 Golden,Strategy,Review,37,persona 4 golden,37,Base Game Title,True
+Total War: THREE KINGDOMS,Strategy,Review,38,total war three kingdoms,38,Base Game Title,True
+Scythe: Digital Edition,Strategy,Review,39,scythe digital edition,39,DLC / Content / Pass,True
+Persona 5 Royal,Strategy,Review,40,persona 5 royal,40,Base Game Title,True
+EA SPORTS FC™ 25,Sports & Racing,Sales,1,ea sports fc 25,1,Base Game Title,True
+NBA 2K25,Sports & Racing,Sales,2,nba 2k25,2,Base Game Title,True
+eFootball™,Sports & Racing,Sales,3,efootball,3,Base Game Title,True
+The Crew Motorfest,Sports & Racing,Sales,4,the crew motorfest,4,Base Game Title,True
+Assetto Corsa,Sports & Racing,Sales,5,assetto corsa,5,Base Game Title,True
+Forza Horizon 5,Sports & Racing,Sales,6,forza horizon 5,6,Base Game Title,True
+EA SPORTS™ Madden NFL 25,Sports & Racing,Sales,7,ea sports madden nfl 25,7,Base Game Title,True
+Assetto Corsa Competizione,Sports & Racing,Sales,8,assetto corsa competizione,8,Base Game Title,True
+CarX Street,Sports & Racing,Sales,9,carx street,9,Base Game Title,True
+Need for Speed™ Heat,Sports & Racing,Sales,10,need for speed heat,10,Base Game Title,True
+Need for Speed™ Unbound,Sports & Racing,Sales,11,need for speed unbound,11,Base Game Title,True
+iRacing,Sports & Racing,Sales,12,iracing,12,Base Game Title,True
+WWE 2K24,Sports & Racing,Sales,13,wwe 2k24,13,Base Game Title,True
+F1® 24,Sports & Racing,Sales,14,f1 24,14,Base Game Title,True
+Fishing Planet,Sports & Racing,Sales,15,fishing planet,15,Base Game Title,True
+Golf With Your Friends,Sports & Racing,Sales,16,golf with your friends,16,Base Game Title,True
+Tony Hawk's™ Pro Skater™ 1 + 2,Sports & Racing,Sales,17,tony hawks pro skater 1 2,17,Base Game Title,True
+EA SPORTS™ WRC,Sports & Racing,Sales,18,ea sports wrc,18,Base Game Title,True
+Russian Fishing 4,Sports & Racing,Sales,19,russian fishing 4,19,Base Game Title,True
+Season 1 MyCAREER Bonus Offer,Sports & Racing,Sales,20,season 1 mycareer bonus offer,20,Base Game Title,True
+Football Manager 2024,Sports & Racing,Sales,21,football manager 2024,21,Base Game Title,True
+CarX Street - Deluxe Cars,Sports & Racing,Sales,22,carx street deluxe cars,22,DLC / Content / Pass,False
+NBA 2K25 Hall of Fame Pass: Season 1,Sports & Racing,Sales,23,nba 2k25 hall of fame pass season 1,23,DLC / Content / Pass,True
+F1® Manager 2024,Sports & Racing,Sales,24,f1 manager 2024,24,Base Game Title,True
+Rooftops & Alleys: The Parkour Game,Sports & Racing,Sales,25,rooftops alleys the parkour game,25,Base Game Title,True
+Liftoff®: FPV Drone Racing,Sports & Racing,Sales,26,liftoff fpv drone racing,26,Base Game Title,True
+EA SPORTS FC™ 24,Sports & Racing,Sales,27,ea sports fc 24,27,Base Game Title,True
+Undisputed,Sports & Racing,Sales,28,undisputed,28,Base Game Title,True
+Need for Speed™ Payback,Sports & Racing,Sales,29,need for speed payback,29,Base Game Title,True
+CarX Drift Racing Online,Sports & Racing,Sales,30,carx drift racing online,30,Base Game Title,True
+PGA TOUR 2K23,Sports & Racing,Sales,31,pga tour 2k23,31,Base Game Title,True
+DiRT Rally 2.0,Sports & Racing,Sales,32,dirt rally 20,32,Base Game Title,True
+Assetto Corsa Competizione - 24H Nürburgring Pack,Sports & Racing,Sales,33,assetto corsa competizione 24h nürburgring pack,33,DLC / Content / Pass,True
+Automobilista 2,Sports & Racing,Sales,34,automobilista 2,34,Base Game Title,True
+Assetto Corsa Competizione - GT2 Pack,Sports & Racing,Sales,35,assetto corsa competizione gt2 pack,35,DLC / Content / Pass,False
+theHunter: Call of the Wild™ - Sundarpatan Nepal Hunting Reserve,Sports & Racing,Sales,36,thehunter call of the wild sundarpatan nepal hunting reserve,36,DLC / Content / Pass,False
+NBA 2K24,Sports & Racing,Sales,37,nba 2k24,37,Base Game Title,True
+Steep™,Sports & Racing,Sales,38,steep,38,Base Game Title,True
+Riders Republic,Sports & Racing,Sales,39,riders republic,39,Base Game Title,True
+Season 1 MyTEAM Bonus Offer,Sports & Racing,Sales,40,season 1 myteam bonus offer,40,Base Game Title,True
+EA SPORTS FC™ 25,Sports & Racing,Revenue,1,ea sports fc 25,1,Base Game Title,True
+NBA 2K25,Sports & Racing,Revenue,2,nba 2k25,2,Base Game Title,True
+Riders Republic,Sports & Racing,Revenue,3,riders republic,3,Base Game Title,True
+eFootball™,Sports & Racing,Revenue,4,efootball,4,Base Game Title,True
+EA SPORTS™ Madden NFL 25,Sports & Racing,Revenue,5,ea sports madden nfl 25,5,Base Game Title,True
+Forza Horizon 5,Sports & Racing,Revenue,6,forza horizon 5,6,Base Game Title,True
+The Crew Motorfest,Sports & Racing,Revenue,7,the crew motorfest,7,Base Game Title,True
+Assetto Corsa,Sports & Racing,Revenue,8,assetto corsa,8,Base Game Title,True
+CarX Street,Sports & Racing,Revenue,9,carx street,9,Base Game Title,True
+Assetto Corsa Competizione,Sports & Racing,Revenue,10,assetto corsa competizione,10,Base Game Title,True
+All-In-One Sports VR,Sports & Racing,Revenue,11,allinone sports vr,11,Base Game Title,True
+iRacing,Sports & Racing,Revenue,12,iracing,12,Base Game Title,True
+Golf With Your Friends,Sports & Racing,Revenue,13,golf with your friends,13,Base Game Title,True
+WWE 2K24,Sports & Racing,Revenue,14,wwe 2k24,14,Base Game Title,True
+F1® 24,Sports & Racing,Revenue,15,f1 24,15,Base Game Title,True
+Fishing Planet,Sports & Racing,Revenue,16,fishing planet,16,Base Game Title,True
+Need for Speed™ Heat,Sports & Racing,Revenue,17,need for speed heat,17,Base Game Title,True
+EA SPORTS FC™ 24,Sports & Racing,Revenue,18,ea sports fc 24,18,Base Game Title,True
+Football Manager 2024,Sports & Racing,Revenue,19,football manager 2024,19,Base Game Title,True
+Need for Speed™ Unbound,Sports & Racing,Revenue,20,need for speed unbound,20,Base Game Title,True
+Tony Hawk's™ Pro Skater™ 1 + 2,Sports & Racing,Revenue,21,tony hawks pro skater 1 2,21,Base Game Title,True
+Downhill Pro Racer,Sports & Racing,Revenue,22,downhill pro racer,22,Base Game Title,True
+Russian Fishing 4,Sports & Racing,Revenue,23,russian fishing 4,23,Base Game Title,True
+CarX Street - Deluxe Cars,Sports & Racing,Revenue,24,carx street deluxe cars,24,DLC / Content / Pass,False
+F1® Manager 2024,Sports & Racing,Revenue,25,f1 manager 2024,25,Base Game Title,True
+Slime Volley,Sports & Racing,Revenue,26,slime volley,26,Base Game Title,True
+MX vs ATV Legends,Sports & Racing,Revenue,27,mx vs atv legends,27,Base Game Title,True
+All In One Sports - Hockey DLC,Sports & Racing,Revenue,28,all in one sports hockey dlc,28,DLC / Content / Pass,True
+All In One Sports - Soccer DLC,Sports & Racing,Revenue,29,all in one sports soccer dlc,29,DLC / Content / Pass,True
+Descenders,Sports & Racing,Revenue,30,descenders,30,Base Game Title,True
+All In One Sports - KungFu DLC,Sports & Racing,Revenue,31,all in one sports kungfu dlc,31,DLC / Content / Pass,False
+RIDE 5,Sports & Racing,Revenue,32,ride 5,32,Base Game Title,True
+Golf It!,Sports & Racing,Revenue,33,golf it,33,Base Game Title,True
+PGA TOUR 2K23,Sports & Racing,Revenue,34,pga tour 2k23,34,Base Game Title,True
+Rooftops & Alleys: The Parkour Game,Sports & Racing,Revenue,35,rooftops alleys the parkour game,35,Base Game Title,True
+Motordoom,Sports & Racing,Revenue,36,motordoom,36,Base Game Title,True
+Sledders,Sports & Racing,Revenue,37,sledders,37,Base Game Title,True
+The Ramp,Sports & Racing,Revenue,38,the ramp,38,Base Game Title,True
+Liftoff®: FPV Drone Racing,Sports & Racing,Revenue,39,liftoff fpv drone racing,39,Base Game Title,True
+EA SPORTS™ WRC,Sports & Racing,Revenue,40,ea sports wrc,40,Base Game Title,True
+All-In-One Sports VR,Sports & Racing,Review,1,allinone sports vr,1,Base Game Title,True
+Riders Republic,Sports & Racing,Review,2,riders republic,2,Base Game Title,True
+The Ramp,Sports & Racing,Review,3,the ramp,3,Base Game Title,True
+Descenders,Sports & Racing,Review,4,descenders,4,Base Game Title,True
+Motordoom,Sports & Racing,Review,5,motordoom,5,Base Game Title,True
+Sledders,Sports & Racing,Review,6,sledders,6,Base Game Title,True
+Monster Energy Supercross - The Official Videogame,Sports & Racing,Review,7,monster energy supercross the official videogame,7,Base Game Title,True
+Golf With Your Friends,Sports & Racing,Review,8,golf with your friends,8,Base Game Title,True
+Skater XL - The Ultimate Skateboarding Game,Sports & Racing,Review,9,skater xl the ultimate skateboarding game,9,Base Game Title,True
+TrackDayR,Sports & Racing,Review,10,trackdayr,10,Base Game Title,True
+69 Balls,Sports & Racing,Review,11,69 balls,11,Base Game Title,True
+Steep™,Sports & Racing,Review,12,steep,12,Base Game Title,True
+Forza Horizon 5,Sports & Racing,Review,13,forza horizon 5,13,Base Game Title,True
+MX vs. ATV Reflex,Sports & Racing,Review,14,mx vs atv reflex,14,Base Game Title,True
+MXGP 2021 - The Official Motocross Videogame,Sports & Racing,Review,15,mxgp 2021 the official motocross videogame,15,Base Game Title,True
+CarX Drift Racing Online,Sports & Racing,Review,16,carx drift racing online,16,Base Game Title,True
+Golf It!,Sports & Racing,Review,17,golf it,17,Base Game Title,True
+Session: Skate Sim,Sports & Racing,Review,18,session skate sim,18,Base Game Title,True
+MXGP3 - The Official Motocross Videogame,Sports & Racing,Review,19,mxgp3 the official motocross videogame,19,Base Game Title,True
+MXGP - The Official Motocross Videogame,Sports & Racing,Review,20,mxgp the official motocross videogame,20,Base Game Title,True
+Walkabout Mini Golf VR,Sports & Racing,Review,21,walkabout mini golf vr,21,Base Game Title,True
+MX vs ATV All Out,Sports & Racing,Review,22,mx vs atv all out,22,Base Game Title,True
+Driftwood,Sports & Racing,Review,23,driftwood,23,Base Game Title,True
+Assetto Corsa,Sports & Racing,Review,24,assetto corsa,24,Base Game Title,True
+RIDE 4,Sports & Racing,Review,25,ride 4,25,Base Game Title,True
+Gym Simulator 24,Sports & Racing,Review,26,gym simulator 24,26,Base Game Title,True
+Wrestling Empire,Sports & Racing,Review,27,wrestling empire,27,Base Game Title,True
+RIDE 3,Sports & Racing,Review,28,ride 3,28,Base Game Title,True
+Fishing Planet,Sports & Racing,Review,29,fishing planet,29,Base Game Title,True
+Need for Speed™ Heat,Sports & Racing,Review,30,need for speed heat,30,Base Game Title,True
+Golf Gang,Sports & Racing,Review,31,golf gang,31,Base Game Title,True
+Lonely Mountains: Downhill,Sports & Racing,Review,32,lonely mountains downhill,32,Base Game Title,True
+GP Bikes,Sports & Racing,Review,33,gp bikes,33,Base Game Title,True
+Golf Peaks,Sports & Racing,Review,34,golf peaks,34,Base Game Title,True
+PIPE by BMX Streets,Sports & Racing,Review,35,pipe by bmx streets,35,Base Game Title,True
+MXGP PRO,Sports & Racing,Review,36,mxgp pro,36,Base Game Title,True
+MXGP 2019 - The Official Motocross Videogame,Sports & Racing,Review,37,mxgp 2019 the official motocross videogame,37,Base Game Title,True
+Ride 2,Sports & Racing,Review,38,ride 2,38,Base Game Title,True
+Tanuki Sunset,Sports & Racing,Review,39,tanuki sunset,39,Base Game Title,True
+Grand Mountain Adventure: Wonderlands,Sports & Racing,Review,40,grand mountain adventure wonderlands,40,Base Game Title,True
