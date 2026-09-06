@@ -3,6 +3,7 @@
 **Industry:** Gaming & Digital Entertainment Analytics  
 **Tools:** Python · Streamlit · DuckDB · Scikit-Learn · XGBoost · Google Gemini 2.5 Flash · Plotly · Data Engineering  
 **Status:** ✅ Complete  
+**Live Application Demo:** 🌐 [https://4b4p6qmvhxpesw8glif8gm.streamlit.app/](https://4b4p6qmvhxpesw8glif8gm.streamlit.app/)
 
 ---
 
