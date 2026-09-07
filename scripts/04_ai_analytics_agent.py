@@ -144,7 +144,7 @@ User Question: {question}
             SELECT game_name, COUNT(*) AS total_reviews_analyzed, 
                    ROUND(AVG(hours_played_clean), 1) AS avg_hours_played,
                    ROUND(AVG(is_recommended) * 100, 2) AS recommendation_pct
-            FROM steam_reviews GROUP BY game_name HAVING COUNT(*) >= 500 ORDER BY total_reviews_analyzed DESC LIMIT 10;
+            FROM steam_reviews GROUP BY game_name HAVING COUNT(*) >= 10 ORDER BY total_reviews_analyzed DESC LIMIT 10;
             """
             engine_type = "Schema Engine (Review Engagement)"
         
