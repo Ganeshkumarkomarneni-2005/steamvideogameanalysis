@@ -31,6 +31,14 @@ def extract_steam_appid(link_str):
         return match.group(1)
     return None
 
+def clean_meta_str(val, default='Unknown'):
+    if not val or pd.isna(val):
+        return default
+    s = str(val).strip("[]'\" ")
+    s = re.sub(r"['\"]", "", s)
+    return s if s else default
+
+
 
 # -------------------------------------------------------------
 # 1. PAGE CONFIGURATION & GAMING INTELLIGENCE NOIR THEME SYSTEM
@@ -545,12 +553,14 @@ elif navigation == "🎮 Game Analytics":
     st.markdown("<div class='page-title'>GAME ANALYTICS</div>", unsafe_allow_html=True)
     st.markdown("<div class='page-subtitle'>Explore game performance, recommendation trends, player engagement and review behavior.</div>", unsafe_allow_html=True)
 
+    all_catalog_games = con.execute("SELECT DISTINCT game_name FROM steam_reviews ORDER BY game_name").df()['game_name'].tolist()
+
     # Filter Controls inside Card
     st.markdown("<div class='saas-card'>", unsafe_allow_html=True)
     f_col1, f_col2, f_col3 = st.columns([2, 1, 1])
     
     with f_col1:
-        search_query = st.text_input("Search Game Name:", placeholder="e.g. Counter-Strike, Portal, Dota 2...")
+        search_query = st.text_input("Search Game Name:", placeholder="e.g. Vampire Survivors, Counter-Strike, Portal, Dota 2...")
     with f_col2:
         all_genres = con.execute("""
             WITH genre_split AS (
@@ -566,11 +576,14 @@ elif navigation == "🎮 Game Analytics":
 
     # Query Filtered Games from DuckDB
     where_clauses = ["1=1"]
+    params = []
     if search_query.strip():
-        where_clauses.append(f"LOWER(r.game_name) LIKE LOWER('%{search_query.strip()}%')")
+        where_clauses.append("LOWER(r.game_name) LIKE LOWER(?)")
+        params.append(f"%{search_query.strip()}%")
     if selected_genres:
-        genre_conditions = " OR ".join([f"LOWER(d.genres) LIKE LOWER('%{g}%')" for g in selected_genres])
+        genre_conditions = " OR ".join(["LOWER(d.genres) LIKE LOWER(?)" for _ in selected_genres])
         where_clauses.append(f"({genre_conditions})")
+        params.extend([f"%{g}%" for g in selected_genres])
     
     where_sql = " AND ".join(where_clauses)
     
@@ -588,7 +601,13 @@ elif navigation == "🎮 Game Analytics":
         HAVING rec_rate >= {min_rec_rate}
         ORDER BY total_reviews DESC
         LIMIT 6
-    """).df()
+    """, params).df()
+
+    # Determine default selected game
+    if search_query.strip() and not df_filtered_games.empty:
+        selected_game = df_filtered_games.iloc[0]['game_name']
+    else:
+        selected_game = st.session_state.get("selected_game_inspect", df_filtered_games.iloc[0]['game_name'] if not df_filtered_games.empty else (all_catalog_games[0] if all_catalog_games else None))
 
     st.markdown("### 🏆 Top Games Performance Cards")
     if df_filtered_games.empty:
@@ -610,23 +629,95 @@ elif navigation == "🎮 Game Analytics":
                 else:
                     img_src = b64_placeholder
 
+                is_active = (row['game_name'] == selected_game)
+                card_border = "border-color: #38BDF8; box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);" if is_active else ""
+                active_badge = '<span class="badge badge-cyan" style="margin-left: 6px;">ACTIVE</span>' if is_active else ""
+
                 badge_class = "badge-green" if row['rec_rate'] >= 80 else ("badge-amber" if row['rec_rate'] >= 60 else "badge-red")
                 st.markdown(f"""
-                <div class="game-card">
+                <div class="game-card" style="{card_border}">
                     <div style="height: 125px; background-color: #070B14; overflow: hidden; border-bottom: 1px solid #1E293B; display: flex; align-items: center; justify-content: center;">
                         <img src="{img_src}" style="width: 100%; height: 125px; object-fit: cover;" onerror="this.onerror=null; this.src='{b64_placeholder}';"/>
                     </div>
                     <div class="game-card-body">
-                        <div style="font-weight: 700; color: #F8FAFC; font-size: 0.95rem; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{row['game_name']}</div>
+                        <div style="font-weight: 700; color: #F8FAFC; font-size: 0.95rem; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            {row['game_name']}{active_badge}
+                        </div>
                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
                             <span class="badge {badge_class}">⭐ {row['rec_rate']}% Recommended</span>
                             <span style="font-size: 0.75rem; color: #64748B;">{row['total_reviews']:,} reviews</span>
                         </div>
-                        <div style="font-size: 0.8rem; color: #94A3B8;">⏱️ Average Playtime: <strong>{row['avg_hours']} hrs</strong></div>
+                        <div style="font-size: 0.8rem; color: #94A3B8; margin-bottom: 10px;">⏱️ Average Playtime: <strong>{row['avg_hours']} hrs</strong></div>
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
+                
+                btn_label = "✓ Inspecting Game" if is_active else f"🔍 Inspect {row['game_name']}"
+                if st.button(btn_label, key=f"btn_inspect_{idx}"):
+                    st.session_state["selected_game_inspect"] = row['game_name']
+                    st.toast(f"🎮 Loaded {row['game_name']} into Inspector!", icon="🔍")
+                    st.rerun()
 
+    # Game Intelligence Detailed Inspector Section
+    if selected_game:
+        df_detail = con.execute("""
+            SELECT 
+                r.game_name AS name,
+                COALESCE(MAX(d.genres), 'Action') AS genres, 
+                COALESCE(MAX(d.publisher), 'Valve') AS publisher, 
+                COALESCE(MAX(d.developer), 'Unknown') AS developer, 
+                COALESCE(MAX(d.overall_player_rating), 'Very Positive') AS rating,
+                MAX(d.link) AS link,
+                COUNT(r.review) AS review_count,
+                ROUND(AVG(r.is_recommended) * 100, 1) AS rec_pct,
+                ROUND(AVG(r.hours_played_clean), 1) AS avg_hours
+            FROM steam_reviews r
+            LEFT JOIN games_desc d ON LOWER(r.game_name) = LOWER(d.name) OR r.normalized_game_name = d.normalized_game_name
+            WHERE LOWER(r.game_name) = LOWER(?)
+            GROUP BY r.game_name
+        """, [selected_game]).df()
+
+        if not df_detail.empty:
+            g_info = df_detail.iloc[0]
+            g_appid = extract_steam_appid(g_info.get('link'))
+            g_img = f"https://cdn.cloudflare.steamstatic.com/steam/apps/{g_appid}/header.jpg" if g_appid else b64_placeholder
+
+            pub_str = clean_meta_str(g_info['publisher'], 'Valve')
+            dev_str = clean_meta_str(g_info['developer'], 'Unknown')
+            rat_str = clean_meta_str(g_info['rating'], 'Very Positive')
+
+            st.markdown(f"""
+            <div class="saas-card" style="margin-top: 20px; border-color: rgba(56, 189, 248, 0.5);">
+                <div style="display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap;">
+                    <img src="{g_img}" style="width: 280px; height: 130px; object-fit: cover; border-radius: 8px; border: 1px solid #1E293B;" onerror="this.onerror=null; this.src='{b64_placeholder}';"/>
+                    <div style="flex: 1; min-width: 300px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                            <div style="font-size: 1.3rem; font-weight: 700; color: #F8FAFC;">{g_info['name']}</div>
+                            <span class="badge badge-cyan">INSPECTED GAME</span>
+                        </div>
+                        <div style="display: flex; gap: 16px; font-size: 0.82rem; color: #94A3B8; margin-bottom: 12px;">
+                            <div>Publisher: <strong style="color: #F8FAFC;">{pub_str}</strong></div>
+                            <div>Developer: <strong style="color: #F8FAFC;">{dev_str}</strong></div>
+                            <div>Steam Rating: <strong style="color: #34D399;">{rat_str}</strong></div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; background: #070B14; padding: 12px; border-radius: 8px; border: 1px solid #1E293B;">
+                            <div>
+                                <div style="font-size: 0.7rem; color: #64748B; uppercase;">RECOMMENDATION RATE</div>
+                                <div style="font-size: 1.1rem; font-weight: 700; color: #34D399;">{g_info['rec_pct']}%</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.7rem; color: #64748B; uppercase;">AVG PLAYTIME</div>
+                                <div style="font-size: 1.1rem; font-weight: 700; color: #38BDF8;">{g_info['avg_hours']} hrs</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.7rem; color: #64748B; uppercase;">AUDITED REVIEWS</div>
+                                <div style="font-size: 1.1rem; font-weight: 700; color: #F8FAFC;">{g_info['review_count']:,}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
 
     # Detailed Charts
     c_ga1, c_ga2 = st.columns(2)
@@ -688,21 +779,21 @@ elif navigation == "🎮 Game Analytics":
         </div>
     """, unsafe_allow_html=True)
     
-    all_game_names = con.execute("SELECT DISTINCT game_name FROM steam_reviews ORDER BY game_name").df()['game_name'].tolist()
-    if len(all_game_names) >= 2:
+    if len(all_catalog_games) >= 2:
         cmp_col1, cmp_col2 = st.columns(2)
         with cmp_col1:
-            g1 = st.selectbox("Select First Game:", options=all_game_names, index=0)
+            g1 = st.selectbox("Select First Game:", options=all_catalog_games, index=0)
         with cmp_col2:
-            g2 = st.selectbox("Select Second Game:", options=all_game_names, index=min(1, len(all_game_names)-1))
+            g2 = st.selectbox("Select Second Game:", options=all_catalog_games, index=min(1, len(all_catalog_games)-1))
         
-        df_cmp = con.execute(f"""
+        df_cmp = con.execute("""
             SELECT game_name, COUNT(*) AS reviews, ROUND(AVG(is_recommended)*100, 1) AS rec_rate, ROUND(AVG(hours_played_clean), 1) AS avg_hours, ROUND(AVG(helpful_clean), 1) AS avg_helpful
-            FROM steam_reviews WHERE game_name IN ('{g1.replace("'", "''")}', '{g2.replace("'", "''")}') GROUP BY game_name
-        """).df()
+            FROM steam_reviews WHERE game_name IN (?, ?) GROUP BY game_name
+        """, [g1, g2]).df()
         
         st.dataframe(df_cmp, use_container_width=True, hide_index=True)
     st.markdown("</div>", unsafe_allow_html=True)
+
 
 
 # -------------------------------------------------------------
