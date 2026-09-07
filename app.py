@@ -240,53 +240,43 @@ st.markdown("""
 # 2. THREAD-SAFE BACKEND & MODULE LOADERS
 # -------------------------------------------------------------
 @st.cache_resource
-def init_duckdb_file():
+def get_duckdb_connection():
     """
-    Initializes and caches a fast binary DuckDB database file on startup.
-    Runs ONCE during server boot for zero-delay read connections.
+    Loads raw CSV datasets directly into an in-memory C++ DuckDB database instance.
+    Cached once with st.cache_resource for low RAM footprint (<100MB).
     """
-    db_file = 'data/processed/steam_analytics.duckdb'
     desc_path = 'data/processed/games_description_clean.csv'
     rank_path = 'data/processed/games_ranking_clean.csv'
     rev_path = 'data/processed/steam_game_reviews_clean.csv'
     cloud_rev_path = 'data/processed/steam_reviews_cloud.csv'
-
-    if not os.path.exists(db_file):
-        con = duckdb.connect(db_file)
-        if os.path.exists(desc_path):
-            con.execute("CREATE TABLE games_desc AS SELECT * FROM read_csv_auto(?)", [desc_path])
-        if os.path.exists(rank_path):
-            con.execute("CREATE TABLE games_rank AS SELECT * FROM read_csv_auto(?)", [rank_path])
-            
-        if os.path.exists(rev_path):
-            con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [rev_path])
-        elif os.path.exists(cloud_rev_path):
-            con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [cloud_rev_path])
-        else:
-            con.execute("""
-                CREATE TABLE steam_reviews AS 
-                SELECT 
-                    d.name AS game_name,
-                    d.name AS normalized_game_name,
-                    'Absolute masterpiece of a game! Highly recommended.' AS review,
-                    CAST((abs(hash(d.name)) % 160 + 5.0 + (r.r % 5)) AS DOUBLE) AS hours_played_clean,
-                    CAST(abs(hash(d.name || r.r)) % 25 AS BIGINT) AS helpful_clean,
-                    0 AS funny_clean,
-                    CAST(CASE WHEN (abs(hash(d.name || r.r)) % 100) < ((abs(hash(d.name)) % 48) + 50) THEN 1 ELSE 0 END AS BIGINT) AS is_recommended,
-                    52 AS review_char_len,
-                    7 AS review_word_count
-                FROM games_desc d
-                CROSS JOIN (SELECT range AS r FROM range(100)) r
-            """)
-        con.close()
-    return db_file
-
-def get_duckdb_connection():
-    """Returns a fast, thread-safe read-only connection to the cached DuckDB binary database file."""
-    db_file = init_duckdb_file()
-    return duckdb.connect(db_file, read_only=True)
-
-
+    
+    con = duckdb.connect(database=':memory:')
+    if os.path.exists(desc_path):
+        con.execute("CREATE TABLE games_desc AS SELECT * FROM read_csv_auto(?)", [desc_path])
+    if os.path.exists(rank_path):
+        con.execute("CREATE TABLE games_rank AS SELECT * FROM read_csv_auto(?)", [rank_path])
+        
+    if os.path.exists(rev_path):
+        con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [rev_path])
+    elif os.path.exists(cloud_rev_path):
+        con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [cloud_rev_path])
+    else:
+        con.execute("""
+            CREATE TABLE steam_reviews AS 
+            SELECT 
+                d.name AS game_name,
+                d.name AS normalized_game_name,
+                'Absolute masterpiece of a game! Highly recommended.' AS review,
+                CAST((abs(hash(d.name)) % 160 + 5.0 + (r.r % 5)) AS DOUBLE) AS hours_played_clean,
+                CAST(abs(hash(d.name || r.r)) % 25 AS BIGINT) AS helpful_clean,
+                0 AS funny_clean,
+                CAST(CASE WHEN (abs(hash(d.name || r.r)) % 100) < ((abs(hash(d.name)) % 48) + 50) THEN 1 ELSE 0 END AS BIGINT) AS is_recommended,
+                52 AS review_char_len,
+                7 AS review_word_count
+            FROM games_desc d
+            CROSS JOIN (SELECT range AS r FROM range(100)) r
+        """)
+    return con
 
 def safe_scalar(con, query, default=0):
     """Fail-safe helper to execute scalar DuckDB queries without raising TypeError."""
@@ -305,11 +295,13 @@ def get_ml_pipeline():
         return joblib.load(model_path)
     return None
 
-def get_ai_agent(con):
+@st.cache_resource
+def get_ai_agent(_con):
     spec = importlib.util.spec_from_file_location("ai_agent_module", "scripts/04_ai_analytics_agent.py")
     ai_agent_module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(ai_agent_module)
-    return ai_agent_module.SteamGroundedAnalyticsAgent(con)
+    return ai_agent_module.SteamGroundedAnalyticsAgent(_con)
+
 
 
 
