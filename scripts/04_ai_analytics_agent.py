@@ -179,6 +179,22 @@ User Question: {question}
             ORDER BY total_helpful_votes DESC LIMIT 10;
             """
             engine_type = "Schema Engine (Helpful Telemetry)"
+        elif 'price' in q or 'cost' in q or 'review count' in q or 'purchased' in q:
+            sql = """
+            SELECT name AS game_name, COALESCE(publisher, 'Unknown') AS publisher, 
+                   number_of_reviews_from_purchased_people_clean AS total_purchased_reviews, overall_player_rating
+            FROM games_desc WHERE number_of_reviews_from_purchased_people_clean IS NOT NULL 
+            ORDER BY number_of_reviews_from_purchased_people_clean DESC LIMIT 10;
+            """
+            engine_type = "Schema Engine (Review Volume & Rating Analysis)"
+        elif 'satisfaction' in q or 'highest recommendation' in q or 'top rated' in q or 'best rated' in q:
+            sql = """
+            SELECT game_name, COUNT(*) AS total_reviews_analyzed, 
+                   ROUND(AVG(hours_played_clean), 1) AS avg_hours_played,
+                   ROUND(AVG(is_recommended) * 100, 2) AS recommendation_pct
+            FROM steam_reviews GROUP BY game_name HAVING COUNT(*) >= 5 ORDER BY recommendation_pct DESC LIMIT 10;
+            """
+            engine_type = "Schema Engine (High Satisfaction Analysis)"
         elif 'hour' in q or 'playtime' in q or 'played' in q:
             sql = """
             SELECT game_name, COUNT(*) AS total_reviews_analyzed, 
