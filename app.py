@@ -528,7 +528,7 @@ elif navigation == "🤖 AI Text-to-SQL Assistant":
                         st.error(f"Execution Error: {e}")
 
 # -------------------------------------------------------------
-# MODULE 3: LIVE SENTIMENT PREDICTOR
+# MODULE 3: LIVE SENTIMENT PREDICTOR (ENFORCING LIVE ML RULES)
 # -------------------------------------------------------------
 elif navigation == "🔮 Live Sentiment Predictor":
     st.markdown("<div class='page-title'>🔮 Live Steam Review Sentiment Predictor</div>", unsafe_allow_html=True)
@@ -537,29 +537,70 @@ elif navigation == "🔮 Live Sentiment Predictor":
     if ml_pipeline is None:
         st.error("ML Model Pipeline checkpoint (`models/recommendation_pipeline.joblib`) not found. Please train model pipeline.")
     else:
+        # LIVE ML RULE #18: Adversarial Test Suite Quick Selection
+        st.markdown("### 🧪 Adversarial Test Suite (Live ML Validation Rules #8–#15):")
+        adv_cols = st.columns(6)
+        
+        if "pred_text" not in st.session_state:
+            st.session_state["pred_text"] = "Absolute masterpiece of a game! Incredible story, unbelievable visuals, and fluid combat mechanics."
+            st.session_state["pred_hours"] = 45.0
+            st.session_state["pred_votes"] = 15
+
+        if adv_cols[0].button("Negation Test", help="Test Rule #11"):
+            st.session_state["pred_text"] = "Not good at all, terrible performance and crashes constantly."
+            st.session_state["pred_hours"] = 2.0
+            st.session_state["pred_votes"] = 5
+        if adv_cols[1].button("Contrast Words", help="Test Rule #12"):
+            st.session_state["pred_text"] = "Great graphics and music, BUT the gameplay is extremely boring and full of bugs."
+            st.session_state["pred_hours"] = 8.0
+            st.session_state["pred_votes"] = 12
+        if adv_cols[2].button("Sarcasm Test", help="Test Rule #13"):
+            st.session_state["pred_text"] = "Best crash simulator 2024, 10/10 would waste money again."
+            st.session_state["pred_hours"] = 12.0
+            st.session_state["pred_votes"] = 40
+        if adv_cols[3].button("Mixed Sentiment", help="Test Rule #14"):
+            st.session_state["pred_text"] = "Decent visuals and fun combat, although server lag ruined the overall experience."
+            st.session_state["pred_hours"] = 18.0
+            st.session_state["pred_votes"] = 3
+        if adv_cols[4].button("Short Review", help="Test Rule #8"):
+            st.session_state["pred_text"] = "Refunded."
+            st.session_state["pred_hours"] = 0.5
+            st.session_state["pred_votes"] = 1
+        if adv_cols[5].button("OOV / Meaningless", help="Test Rule #10"):
+            st.session_state["pred_text"] = "AWERTYJTREWERTYUIOIUYTREWERTYUIUY"
+            st.session_state["pred_hours"] = 45.0
+            st.session_state["pred_votes"] = 15
+
         c_in1, c_in2 = st.columns(2)
 
         with c_in1:
-            input_text = st.text_area("Review Text Content:", value="Absolute masterpiece of a game! Incredible story, unbelievable visuals, and fluid combat mechanics.", height=120)
-            hours_played = st.number_input("Player Hours Played:", min_value=0.1, max_value=5000.0, value=45.0, step=1.0)
+            input_text = st.text_area("Review Text Content:", value=st.session_state["pred_text"], height=120)
+            hours_played = st.number_input("Player Hours Played:", min_value=0.1, max_value=5000.0, value=float(st.session_state["pred_hours"]), step=1.0)
 
         with c_in2:
-            helpful_votes = st.number_input("Helpful Votes Received:", min_value=0, max_value=5000, value=15, step=1)
+            helpful_votes = st.number_input("Helpful Votes Received:", min_value=0, max_value=5000, value=int(st.session_state["pred_votes"]), step=1)
             word_count = len(input_text.split())
             char_len = len(input_text)
             
+            # LIVE ML RULE #1, #2, #10: Check TF-IDF matching n-grams
+            preproc = ml_pipeline.named_steps['preprocessor']
+            tfidf_vec = preproc.named_transformers_['text']
+            tfidf_input = tfidf_vec.transform([input_text])
+            matched_ngrams_count = tfidf_input.nnz
+
             st.markdown(f"""
             <div style="background: #0E1420; border: 1px solid #1F2937; padding: 1rem; border-radius: 8px; margin-top: 1.6rem;">
-                <div style="font-size: 0.8rem; color: #64748B; uppercase; font-weight: 600;">Calculated Text Telemetry</div>
+                <div style="font-size: 0.8rem; color: #64748B; text-transform: uppercase; font-weight: 600;">Calculated Text Telemetry</div>
                 <div style="margin-top: 0.4rem; color: #F8FAFC;">• Word Count: <strong>{word_count} words</strong></div>
                 <div style="margin-top: 0.2rem; color: #F8FAFC;">• Character Length: <strong>{char_len} chars</strong></div>
+                <div style="margin-top: 0.2rem; color: #38BDF8;">• Matched TF-IDF N-Grams: <strong>{matched_ngrams_count} features</strong></div>
             </div>
             """, unsafe_allow_html=True)
 
         st.markdown("<div style='margin-top: 1rem;'></div>", unsafe_allow_html=True)
         if st.button("Run Real-Time Sentiment Inference"):
             if not input_text.strip():
-                st.warning("Please enter review text.")
+                st.warning("⚠️ Live ML Rule #9 Violation: Review text is empty. Please enter review text.")
             else:
                 input_df = pd.DataFrame([{
                     'review': input_text,
@@ -574,6 +615,22 @@ elif navigation == "🔮 Live Sentiment Predictor":
                 rec_score = proba[1] * 100
 
                 st.markdown("---")
+
+                # LIVE ML RULE #8 & #10: Warning Banners for Short or OOV text
+                if word_count < 3 and matched_ngrams_count > 0:
+                    st.markdown("""
+                    <div style="background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.3); padding: 0.75rem 1rem; border-radius: 8px; margin-bottom: 1rem; color: #FBBF24;">
+                        ⚠️ <strong>Live ML Rule #8 Warning:</strong> Very short review (&lt; 3 words). Semantic context is limited.
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                if matched_ngrams_count == 0:
+                    st.markdown("""
+                    <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.75rem 1rem; border-radius: 8px; margin-bottom: 1rem; color: #F87171;">
+                        ⚠️ <strong>Live ML Rule #10 & #15 Alert:</strong> Out-of-Vocabulary / Unrecognized Text Detected (0 matching n-grams). Confidence reported cautiously—prediction is relying primarily on numerical engagement telemetry.
+                    </div>
+                    """, unsafe_allow_html=True)
+
                 col_res1, col_res2 = st.columns(2)
 
                 with col_res1:
@@ -581,18 +638,25 @@ elif navigation == "🔮 Live Sentiment Predictor":
                         st.markdown("""
                         <div style="background: rgba(52, 211, 153, 0.1); border: 1px solid rgba(52, 211, 153, 0.3); padding: 1.25rem; border-radius: 12px; margin-bottom: 1rem;">
                             <div style="color: #34D399; font-size: 1.25rem; font-weight: 700;">👍 PREDICTION: RECOMMENDED</div>
-                            <div style="color: #94A3B8; font-size: 0.85rem; margin-top: 0.4rem;">High positive sentiment affinity detected across n-gram features.</div>
+                            <div style="color: #94A3B8; font-size: 0.85rem; margin-top: 0.4rem;">Positive sentiment affinity detected across multi-feature weights.</div>
                         </div>
                         """, unsafe_allow_html=True)
                     else:
                         st.markdown("""
                         <div style="background: rgba(248, 113, 113, 0.1); border: 1px solid rgba(248, 113, 113, 0.3); padding: 1.25rem; border-radius: 12px; margin-bottom: 1rem;">
-                            <div style="color: #F8FAFC; font-size: 1.25rem; font-weight: 700;">👎 PREDICTION: NOT RECOMMENDED</div>
+                            <div style="color: #F87171; font-size: 1.25rem; font-weight: 700;">👎 PREDICTION: NOT RECOMMENDED</div>
                             <div style="color: #94A3B8; font-size: 0.85rem; margin-top: 0.4rem;">Negative sentiment markers detected in review text.</div>
                         </div>
                         """, unsafe_allow_html=True)
 
                     st.metric("Recommendation Likelihood Score", f"{rec_score:.1f}%")
+                    st.markdown("""
+                    <div style="font-size: 0.75rem; color: #64748B; margin-top: 0.5rem;">
+                        • <strong>Model Version (Rule #16):</strong> v1.2.0-balanced (Multi-Feature Logistic Regression)<br>
+                        • <strong>Calibration Disclaimer (Rule #6 & #17):</strong> Probability represents estimated likelihood under learned weights, not absolute certainty ($P \\neq \\text{Accuracy}$).<br>
+                        • <strong>Telemetry Note (Rule #3–#5):</strong> Playtime & helpful votes are engagement signals, not direct sentiment labels.
+                    </div>
+                    """, unsafe_allow_html=True)
 
                 with col_res2:
                     fig_g = go.Figure(go.Indicator(
