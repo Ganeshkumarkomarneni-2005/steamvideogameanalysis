@@ -77,7 +77,15 @@ class SteamGroundedAnalyticsAgent:
         return clean_sql, df_res
 
     def generate_sql(self, question):
-        """Translates natural language question into SQL using Gemini API or Schema Engine."""
+        """Translates natural language question into SQL using Gemini API or Schema Engine, strictly enforcing Data Grounding Rules."""
+        q = question.lower()
+        
+        # Grounding Rule #4 & #6: Check for unavailable financial / metric abstractions
+        unsupported_financial = ['profit', 'net profit', 'dollar revenue', 'revenue ($)', 'cost', 'mau', 'dau', 'market share', 'margin', 'gross revenue']
+        for term in unsupported_financial:
+            if term in q:
+                raise ValueError(f"I cannot determine this from the available dataset because financial/user metric '{term.title()}' is not present in the available schema. Available columns include: Sales Rank, Review Rank, Review Counts, Playtime Hours, and Recommendation Percentage.")
+
         api_key = os.environ.get('GEMINI_API_KEY') or os.environ.get('GOOGLE_API_KEY')
         
         if api_key:
@@ -85,15 +93,21 @@ class SteamGroundedAnalyticsAgent:
                 from google import genai
                 client = genai.Client(api_key=api_key)
                 prompt = f"""
-You are a SQL expert for Steam Game Intelligence. Translate the user's question into a single valid DuckDB SQL query.
+You are a strict grounded Data Analyst & SQL expert for Steam Game Intelligence. 
+Translate the user's question into a single valid DuckDB SQL query, adhering strictly to the DATA GROUNDING RULES.
 
 Target Database Schema:
 {self.schema_context}
 
-Rules:
-1. Return ONLY the raw SQL query. Do not include markdown headers or conversational commentary.
-2. Only use read-only SELECT or WITH statements.
-3. Handle genres array strings using UNNEST(string_split(genres, ',')) if needed.
+DATA GROUNDING RULES:
+1. Identify every metric required by the user's question before generating SQL.
+2. Verify that each metric exists in the schema (or can be derived from available columns).
+3. NEVER substitute a related metric for the requested metric (e.g. Profit ≠ Revenue, Revenue Rank ≠ Revenue, Sales Rank ≠ Sales, Review Count ≠ Sales/Revenue, Playtime ≠ Retention, Recommendation Rate ≠ Profitability).
+4. If the requested metric cannot be calculated from the available data (e.g., net profit, dollar revenue, MAU/DAU, costs), DO NOT generate SQL.
+5. Instead return EXACTLY: "UNSUPPORTED_METRIC: I cannot determine this from the available dataset because [missing metric/data]."
+6. Never infer unavailable financial, sales, profit, market-share, MAU, DAU, or cost metrics from unrelated columns.
+7. If the dataset contains only a ranking (e.g. Sales Rank), do not treat the ranking as the underlying numerical value.
+8. Only return raw SQL or the UNSUPPORTED_METRIC response.
 
 User Question: {question}
 """
@@ -103,12 +117,16 @@ User Question: {question}
                 )
                 sql_text = response.text.strip()
                 sql_text = re.sub(r'```sql\s*|\s*```', '', sql_text).strip()
+                if "UNSUPPORTED_METRIC:" in sql_text:
+                    reason = sql_text.split("UNSUPPORTED_METRIC:")[1].strip()
+                    raise ValueError(reason)
                 return sql_text, "Gemini LLM Text-to-SQL Model"
+            except ValueError:
+                raise
             except Exception as e:
                 print(f"Gemini API Call failed ({e}). Falling back to Schema Engine...")
 
         # Schema Engine Fallback logic
-        q = question.lower()
         if 'rpg' in q or 'action' in q or 'genre' in q:
             sql = """
             WITH genre_split AS (
@@ -130,7 +148,7 @@ User Question: {question}
             FROM games_desc GROUP BY publisher HAVING COUNT(DISTINCT name) >= 2 ORDER BY total_reviews DESC LIMIT 10;
             """
             engine_type = "Schema Engine (Publisher Analysis)"
-        elif 'divergence' in q or 'rank' in q or 'gem' in q or 'friction' in q:
+        elif 'divergence' in q or 'gem' in q or 'friction' in q:
             sql = """
             WITH rank_pivoted AS (
                 SELECT game_name, normalized_game_name, title_classification,
@@ -142,7 +160,7 @@ User Question: {question}
             FROM rank_pivoted WHERE sales_rank IS NOT NULL AND review_rank IS NOT NULL ORDER BY ABS(sales_rank - review_rank) DESC LIMIT 15;
             """
             engine_type = "Schema Engine (Rank Divergence)"
-        elif 'profit' in q or 'revenue' in q or 'commercial' in q or 'sales' in q or 'grossing' in q:
+        elif 'sales rank' in q or 'review rank' in q or 'rank' in q:
             sql = """
             WITH rank_pivoted AS (
                 SELECT game_name, normalized_game_name, title_classification,
@@ -150,10 +168,10 @@ User Question: {question}
                     MAX(CASE WHEN rank_type = 'Review' THEN rank_clean END) AS review_rank
                 FROM games_rank GROUP BY game_name, normalized_game_name, title_classification
             )
-            SELECT game_name, title_classification, sales_rank AS top_commercial_sales_rank, review_rank
+            SELECT game_name, title_classification, sales_rank, review_rank
             FROM rank_pivoted WHERE sales_rank IS NOT NULL ORDER BY sales_rank ASC LIMIT 10;
             """
-            engine_type = "Schema Engine (Commercial & Sales Performance)"
+            engine_type = "Schema Engine (Sales & Review Rank Performance)"
         elif ('recommended' in q or 'word' in q) and ('vs' in q or 'non' in q or 'compare' in q or 'difference' in q):
             sql = """
             SELECT 

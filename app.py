@@ -514,7 +514,18 @@ elif navigation == "🤖 AI Text-to-SQL Assistant":
                     st.markdown("#### 📊 Grounded Evidence Table:")
                     st.dataframe(res['evidence'], use_container_width=True, hide_index=True)
                 except Exception as e:
-                    st.error(f"Execution Error: {e}")
+                    err_msg = str(e)
+                    if "I cannot determine this from the available dataset" in err_msg or "Grounding" in err_msg:
+                        st.markdown(f"""
+                        <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; color: #F87171;">
+                            <strong>🛡️ Data Grounding Enforcement:</strong> {err_msg}<br><br>
+                            <span style="font-size: 0.85rem; color: #94A3B8;">
+                            <em>Data Grounding Rule #4 & #5:</em> If the requested metric (e.g., Profit, Net Dollar Revenue, MAU/DAU, Cost) cannot be calculated from available schema columns, the agent strictly refuses SQL generation rather than substituting unrelated metrics (Profit ≠ Revenue, Sales Rank ≠ Sales).
+                            </span>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    else:
+                        st.error(f"Execution Error: {e}")
 
 # -------------------------------------------------------------
 # MODULE 3: LIVE SENTIMENT PREDICTOR
