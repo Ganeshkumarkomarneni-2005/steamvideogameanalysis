@@ -239,46 +239,27 @@ st.markdown("""
 # -------------------------------------------------------------
 # 2. THREAD-SAFE CACHED BACKEND & MODULE LOADERS
 # -------------------------------------------------------------
-@st.cache_data
-def load_cached_datasets():
-    """Load and cache raw dataframes in memory safely using Streamlit cache_data."""
+@st.cache_resource
+def get_shared_duckdb_database():
+    """
+    Loads raw CSV datasets directly into an in-memory C++ DuckDB database instance.
+    Cached once with st.cache_resource for low RAM footprint (<100MB).
+    """
     desc_path = 'data/processed/games_description_clean.csv'
     rank_path = 'data/processed/games_ranking_clean.csv'
     rev_path = 'data/processed/steam_game_reviews_clean.csv'
     cloud_rev_path = 'data/processed/steam_reviews_cloud.csv'
-
-    df_desc = pd.read_csv(desc_path) if os.path.exists(desc_path) else pd.DataFrame()
-    df_rank = pd.read_csv(rank_path) if os.path.exists(rank_path) else pd.DataFrame()
-
-    if os.path.exists(rev_path):
-        df_rev = pd.read_csv(rev_path)
-    elif os.path.exists(cloud_rev_path):
-        df_rev = pd.read_csv(cloud_rev_path)
-    else:
-        df_rev = pd.DataFrame()
-
-    return df_desc, df_rank, df_rev
-
-def get_duckdb_connection():
-    """
-    Constructs a fresh, thread-safe in-memory DuckDB connection for the active session,
-    registering the cached dataframes.
-    """
-    df_desc, df_rank, df_rev = load_cached_datasets()
-    con = duckdb.connect(database=':memory:')
     
-    if not df_desc.empty:
-        con.register('games_desc', df_desc)
-    else:
-        con.execute("CREATE TABLE games_desc (name VARCHAR, genres VARCHAR, publisher VARCHAR, number_of_reviews_from_purchased_people_clean BIGINT)")
+    con = duckdb.connect(database=':memory:')
+    if os.path.exists(desc_path):
+        con.execute("CREATE TABLE games_desc AS SELECT * FROM read_csv_auto(?)", [desc_path])
+    if os.path.exists(rank_path):
+        con.execute("CREATE TABLE games_rank AS SELECT * FROM read_csv_auto(?)", [rank_path])
         
-    if not df_rank.empty:
-        con.register('games_rank', df_rank)
-    else:
-        con.execute("CREATE TABLE games_rank (game_name VARCHAR, normalized_game_name VARCHAR, title_classification VARCHAR, rank_type VARCHAR, rank_clean DOUBLE)")
-
-    if not df_rev.empty:
-        con.register('steam_reviews', df_rev)
+    if os.path.exists(rev_path):
+        con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [rev_path])
+    elif os.path.exists(cloud_rev_path):
+        con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [cloud_rev_path])
     else:
         con.execute("""
             CREATE TABLE steam_reviews AS 
@@ -297,6 +278,11 @@ def get_duckdb_connection():
         """)
     return con
 
+def get_duckdb_connection():
+    """Returns a thread-safe cursor handle on the cached shared DuckDB database."""
+    db = get_shared_duckdb_database()
+    return db.cursor()
+
 def safe_scalar(con, query, default=0):
     """Fail-safe helper to execute scalar DuckDB queries without raising TypeError."""
     try:
@@ -314,6 +300,7 @@ def get_ml_pipeline():
         return joblib.load(model_path)
     return None
 
+@st.cache_resource
 def get_ai_agent():
     spec = importlib.util.spec_from_file_location("ai_agent_module", "scripts/04_ai_analytics_agent.py")
     ai_agent_module = importlib.util.module_from_spec(spec)
@@ -323,6 +310,7 @@ def get_ai_agent():
         'data/processed/games_ranking_clean.csv',
         'data/processed/steam_game_reviews_clean.csv'
     )
+
 
 con = get_duckdb_connection()
 ml_pipeline = get_ml_pipeline()
