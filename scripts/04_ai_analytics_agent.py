@@ -111,7 +111,8 @@ DATA GROUNDING RULES:
 5. Instead return EXACTLY: "UNSUPPORTED_METRIC: I cannot determine this from the available dataset because [missing metric/data]."
 6. Never infer unavailable financial, sales, profit, market-share, MAU, DAU, or cost metrics from unrelated columns.
 7. If the dataset contains only a ranking (e.g. Sales Rank), do not treat the ranking as the underlying numerical value.
-8. Only return raw SQL or the UNSUPPORTED_METRIC response.
+8. If the user asks for games with negative reviews, lowest ratings, worst reviews, or critical sentiment, order by recommendation_pct ASC or AVG(is_recommended) ASC.
+9. Only return raw SQL or the UNSUPPORTED_METRIC response.
 
 User Question: {question}
 """
@@ -131,7 +132,15 @@ User Question: {question}
                 print(f"Gemini API Call failed ({e}). Falling back to Schema Engine...")
 
         # Schema Engine Fallback logic
-        if 'rpg' in q or 'action' in q or 'genre' in q:
+        if 'negative' in q or 'bad' in q or 'worst' in q or 'lowest' in q or 'critical' in q:
+            sql = """
+            SELECT game_name, COUNT(*) AS total_reviews_analyzed, 
+                   ROUND(AVG(hours_played_clean), 1) AS avg_hours_played,
+                   ROUND(AVG(is_recommended) * 100, 2) AS recommendation_pct
+            FROM steam_reviews GROUP BY game_name HAVING COUNT(*) >= 5 ORDER BY recommendation_pct ASC LIMIT 10;
+            """
+            engine_type = "Schema Engine (Negative Sentiment / Critical Reviews)"
+        elif 'rpg' in q or 'action' in q or 'genre' in q:
             sql = """
             WITH genre_split AS (
                 SELECT 
