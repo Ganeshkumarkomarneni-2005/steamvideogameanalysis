@@ -142,12 +142,20 @@ User Question: {question}
             FROM rank_pivoted WHERE sales_rank IS NOT NULL AND review_rank IS NOT NULL ORDER BY ABS(sales_rank - review_rank) DESC LIMIT 15;
             """
             engine_type = "Schema Engine (Rank Divergence)"
+        elif 'hour' in q or 'playtime' in q or 'played' in q:
+            sql = """
+            SELECT game_name, COUNT(*) AS total_reviews_analyzed, 
+                   ROUND(AVG(hours_played_clean), 1) AS avg_hours_played,
+                   ROUND(AVG(is_recommended) * 100, 2) AS recommendation_pct
+            FROM steam_reviews GROUP BY game_name HAVING COUNT(*) >= 5 ORDER BY avg_hours_played DESC LIMIT 10;
+            """
+            engine_type = "Schema Engine (Playtime Analysis)"
         else:
             sql = """
             SELECT game_name, COUNT(*) AS total_reviews_analyzed, 
                    ROUND(AVG(hours_played_clean), 1) AS avg_hours_played,
                    ROUND(AVG(is_recommended) * 100, 2) AS recommendation_pct
-            FROM steam_reviews GROUP BY game_name HAVING COUNT(*) >= 10 ORDER BY total_reviews_analyzed DESC LIMIT 10;
+            FROM steam_reviews GROUP BY game_name HAVING COUNT(*) >= 5 ORDER BY total_reviews_analyzed DESC LIMIT 10;
             """
             engine_type = "Schema Engine (Review Engagement)"
         
