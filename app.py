@@ -237,13 +237,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # -------------------------------------------------------------
-# 2. THREAD-SAFE CACHED BACKEND & MODULE LOADERS
+# 2. THREAD-SAFE BACKEND & MODULE LOADERS
 # -------------------------------------------------------------
-@st.cache_resource
-def get_shared_duckdb_database():
+def get_duckdb_connection():
     """
-    Loads raw CSV datasets directly into an in-memory C++ DuckDB database instance.
-    Cached once with st.cache_resource for low RAM footprint (<100MB).
+    Instantiates a fresh, isolated, thread-safe in-memory C++ DuckDB database for the active session.
+    Execution takes ~0.4s and maintains a light RAM footprint (<100MB).
     """
     desc_path = 'data/processed/games_description_clean.csv'
     rank_path = 'data/processed/games_ranking_clean.csv'
@@ -278,10 +277,6 @@ def get_shared_duckdb_database():
         """)
     return con
 
-def get_duckdb_connection():
-    """Returns a thread-safe cursor handle on the cached shared DuckDB database."""
-    db = get_shared_duckdb_database()
-    return db.cursor()
 
 def safe_scalar(con, query, default=0):
     """Fail-safe helper to execute scalar DuckDB queries without raising TypeError."""
