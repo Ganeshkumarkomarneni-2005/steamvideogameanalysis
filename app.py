@@ -295,16 +295,12 @@ def get_ml_pipeline():
         return joblib.load(model_path)
     return None
 
-@st.cache_resource
-def get_ai_agent():
+def get_ai_agent(con):
     spec = importlib.util.spec_from_file_location("ai_agent_module", "scripts/04_ai_analytics_agent.py")
     ai_agent_module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(ai_agent_module)
-    return ai_agent_module.SteamGroundedAnalyticsAgent(
-        'data/processed/games_description_clean.csv',
-        'data/processed/games_ranking_clean.csv',
-        'data/processed/steam_game_reviews_clean.csv'
-    )
+    return ai_agent_module.SteamGroundedAnalyticsAgent(con)
+
 
 
 con = get_duckdb_connection()
@@ -838,7 +834,8 @@ elif navigation == "🤖 AI Analyst":
     st.markdown("<div class='page-title'>🤖 AI ANALYST</div>", unsafe_allow_html=True)
     st.markdown("<div class='page-subtitle'>Ask natural language questions about games, reviews and player behavior.</div>", unsafe_allow_html=True)
 
-    agent = get_ai_agent()
+    agent = get_ai_agent(con)
+
 
     if "ai_prompt" not in st.session_state:
         st.session_state["ai_prompt"] = "Compare RPG and Action games on review volume and game count."

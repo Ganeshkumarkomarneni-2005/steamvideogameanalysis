@@ -16,34 +16,38 @@ class SteamGroundedAnalyticsAgent:
     Uses DuckDB schema introspection and LLM Text-to-SQL translation (with Gemini API / Schema Fallback)
     to parse natural language questions into safe, executable read-only SQL queries.
     """
-    def __init__(self, desc_path, rank_path, rev_path):
-        cloud_rev_path = 'data/processed/steam_reviews_cloud.csv'
-        self.con = duckdb.connect(database=':memory:')
-        if os.path.exists(desc_path):
-            self.con.execute("CREATE TABLE games_desc AS SELECT * FROM read_csv_auto(?)", [desc_path])
-        if os.path.exists(rank_path):
-            self.con.execute("CREATE TABLE games_rank AS SELECT * FROM read_csv_auto(?)", [rank_path])
-            
-        if os.path.exists(rev_path):
-            self.con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [rev_path])
-        elif os.path.exists(cloud_rev_path):
-            self.con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [cloud_rev_path])
+    def __init__(self, desc_path, rank_path=None, rev_path=None):
+        if hasattr(desc_path, 'execute'):
+            self.con = desc_path
         else:
-            self.con.execute("""
-                CREATE TABLE steam_reviews AS 
-                SELECT 
-                    d.name AS game_name,
-                    'Absolute masterpiece of a game! Highly recommended.' AS review,
-                    CAST((abs(hash(d.name)) % 160 + 5.0 + (r.r % 5)) AS DOUBLE) AS hours_played_clean,
-                    CAST(abs(hash(d.name || r.r)) % 25 AS BIGINT) AS helpful_clean,
-                    0 AS funny_clean,
-                    CAST(CASE WHEN (abs(hash(d.name || r.r)) % 100) < ((abs(hash(d.name)) % 48) + 50) THEN 1 ELSE 0 END AS BIGINT) AS is_recommended,
-                    52 AS review_char_len,
-                    7 AS review_word_count
-                FROM games_desc d
-                CROSS JOIN (SELECT range AS r FROM range(100)) r
-            """)
+            cloud_rev_path = 'data/processed/steam_reviews_cloud.csv'
+            self.con = duckdb.connect(database=':memory:')
+            if os.path.exists(desc_path):
+                self.con.execute("CREATE TABLE games_desc AS SELECT * FROM read_csv_auto(?)", [desc_path])
+            if rank_path and os.path.exists(rank_path):
+                self.con.execute("CREATE TABLE games_rank AS SELECT * FROM read_csv_auto(?)", [rank_path])
+                
+            if rev_path and os.path.exists(rev_path):
+                self.con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [rev_path])
+            elif os.path.exists(cloud_rev_path):
+                self.con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [cloud_rev_path])
+            else:
+                self.con.execute("""
+                    CREATE TABLE steam_reviews AS 
+                    SELECT 
+                        d.name AS game_name,
+                        'Absolute masterpiece of a game! Highly recommended.' AS review,
+                        CAST((abs(hash(d.name)) % 160 + 5.0 + (r.r % 5)) AS DOUBLE) AS hours_played_clean,
+                        CAST(abs(hash(d.name || r.r)) % 25 AS BIGINT) AS helpful_clean,
+                        0 AS funny_clean,
+                        CAST(CASE WHEN (abs(hash(d.name || r.r)) % 100) < ((abs(hash(d.name)) % 48) + 50) THEN 1 ELSE 0 END AS BIGINT) AS is_recommended,
+                        52 AS review_char_len,
+                        7 AS review_word_count
+                    FROM games_desc d
+                    CROSS JOIN (SELECT range AS r FROM range(100)) r
+                """)
         self.schema_context = self._extract_schema_context()
+
 
     def _extract_schema_context(self):
         """Introspects table structures and column types from DuckDB."""
