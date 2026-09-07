@@ -8,6 +8,8 @@ __pycache__/
 
 # Raw Data and Large CSV Files (exceeding GitHub 100 MB limits)
 *.zip
+*.duckdb
 data/raw/
 data/processed/steam_game_reviews_clean.csv
+
 

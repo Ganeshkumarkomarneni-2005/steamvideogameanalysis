@@ -239,43 +239,53 @@ st.markdown("""
 # -------------------------------------------------------------
 # 2. THREAD-SAFE BACKEND & MODULE LOADERS
 # -------------------------------------------------------------
-def get_duckdb_connection():
+@st.cache_resource
+def init_duckdb_file():
     """
-    Instantiates a fresh, isolated, thread-safe in-memory C++ DuckDB database for the active session.
-    Execution takes ~0.4s and maintains a light RAM footprint (<100MB).
+    Initializes and caches a fast binary DuckDB database file on startup.
+    Runs ONCE during server boot for zero-delay read connections.
     """
+    db_file = 'data/processed/steam_analytics.duckdb'
     desc_path = 'data/processed/games_description_clean.csv'
     rank_path = 'data/processed/games_ranking_clean.csv'
     rev_path = 'data/processed/steam_game_reviews_clean.csv'
     cloud_rev_path = 'data/processed/steam_reviews_cloud.csv'
-    
-    con = duckdb.connect(database=':memory:')
-    if os.path.exists(desc_path):
-        con.execute("CREATE TABLE games_desc AS SELECT * FROM read_csv_auto(?)", [desc_path])
-    if os.path.exists(rank_path):
-        con.execute("CREATE TABLE games_rank AS SELECT * FROM read_csv_auto(?)", [rank_path])
-        
-    if os.path.exists(rev_path):
-        con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [rev_path])
-    elif os.path.exists(cloud_rev_path):
-        con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [cloud_rev_path])
-    else:
-        con.execute("""
-            CREATE TABLE steam_reviews AS 
-            SELECT 
-                d.name AS game_name,
-                d.name AS normalized_game_name,
-                'Absolute masterpiece of a game! Highly recommended.' AS review,
-                CAST((abs(hash(d.name)) % 160 + 5.0 + (r.r % 5)) AS DOUBLE) AS hours_played_clean,
-                CAST(abs(hash(d.name || r.r)) % 25 AS BIGINT) AS helpful_clean,
-                0 AS funny_clean,
-                CAST(CASE WHEN (abs(hash(d.name || r.r)) % 100) < ((abs(hash(d.name)) % 48) + 50) THEN 1 ELSE 0 END AS BIGINT) AS is_recommended,
-                52 AS review_char_len,
-                7 AS review_word_count
-            FROM games_desc d
-            CROSS JOIN (SELECT range AS r FROM range(100)) r
-        """)
-    return con
+
+    if not os.path.exists(db_file):
+        con = duckdb.connect(db_file)
+        if os.path.exists(desc_path):
+            con.execute("CREATE TABLE games_desc AS SELECT * FROM read_csv_auto(?)", [desc_path])
+        if os.path.exists(rank_path):
+            con.execute("CREATE TABLE games_rank AS SELECT * FROM read_csv_auto(?)", [rank_path])
+            
+        if os.path.exists(rev_path):
+            con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [rev_path])
+        elif os.path.exists(cloud_rev_path):
+            con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [cloud_rev_path])
+        else:
+            con.execute("""
+                CREATE TABLE steam_reviews AS 
+                SELECT 
+                    d.name AS game_name,
+                    d.name AS normalized_game_name,
+                    'Absolute masterpiece of a game! Highly recommended.' AS review,
+                    CAST((abs(hash(d.name)) % 160 + 5.0 + (r.r % 5)) AS DOUBLE) AS hours_played_clean,
+                    CAST(abs(hash(d.name || r.r)) % 25 AS BIGINT) AS helpful_clean,
+                    0 AS funny_clean,
+                    CAST(CASE WHEN (abs(hash(d.name || r.r)) % 100) < ((abs(hash(d.name)) % 48) + 50) THEN 1 ELSE 0 END AS BIGINT) AS is_recommended,
+                    52 AS review_char_len,
+                    7 AS review_word_count
+                FROM games_desc d
+                CROSS JOIN (SELECT range AS r FROM range(100)) r
+            """)
+        con.close()
+    return db_file
+
+def get_duckdb_connection():
+    """Returns a fast, thread-safe read-only connection to the cached DuckDB binary database file."""
+    db_file = init_duckdb_file()
+    return duckdb.connect(db_file, read_only=True)
+
 
 
 def safe_scalar(con, query, default=0):
