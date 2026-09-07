@@ -537,8 +537,7 @@ elif navigation == "🔮 Live Sentiment Predictor":
     if ml_pipeline is None:
         st.error("ML Model Pipeline checkpoint (`models/recommendation_pipeline.joblib`) not found. Please train model pipeline.")
     else:
-        # LIVE ML RULE #18: Adversarial Test Suite Quick Selection
-        st.markdown("### 🧪 Adversarial Test Suite (Live ML Validation Rules #8–#15):")
+        st.markdown("### 🧪 Adversarial Test Suite")
         adv_cols = st.columns(6)
         
         if "pred_text" not in st.session_state:
