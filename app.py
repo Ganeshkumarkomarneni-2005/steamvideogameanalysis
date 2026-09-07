@@ -219,30 +219,54 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # -------------------------------------------------------------
-# 2. CACHED BACKEND & MODULE LOADERS (PRESERVED)
+# 2. THREAD-SAFE CACHED BACKEND & MODULE LOADERS
 # -------------------------------------------------------------
-@st.cache_resource
-def get_duckdb_connection():
+@st.cache_data
+def load_cached_datasets():
+    """Load and cache raw dataframes in memory safely using Streamlit cache_data."""
     desc_path = 'data/processed/games_description_clean.csv'
     rank_path = 'data/processed/games_ranking_clean.csv'
     rev_path = 'data/processed/steam_game_reviews_clean.csv'
     cloud_rev_path = 'data/processed/steam_reviews_cloud.csv'
-    
-    con = duckdb.connect(database=':memory:')
-    if os.path.exists(desc_path):
-        con.execute("CREATE TABLE games_desc AS SELECT * FROM read_csv_auto(?)", [desc_path])
-    if os.path.exists(rank_path):
-        con.execute("CREATE TABLE games_rank AS SELECT * FROM read_csv_auto(?)", [rank_path])
-        
+
+    df_desc = pd.read_csv(desc_path) if os.path.exists(desc_path) else pd.DataFrame()
+    df_rank = pd.read_csv(rank_path) if os.path.exists(rank_path) else pd.DataFrame()
+
     if os.path.exists(rev_path):
-        con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [rev_path])
+        df_rev = pd.read_csv(rev_path)
     elif os.path.exists(cloud_rev_path):
-        con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [cloud_rev_path])
+        df_rev = pd.read_csv(cloud_rev_path)
+    else:
+        df_rev = pd.DataFrame()
+
+    return df_desc, df_rank, df_rev
+
+def get_duckdb_connection():
+    """
+    Constructs a fresh, thread-safe in-memory DuckDB connection for the active session,
+    registering the cached dataframes.
+    """
+    df_desc, df_rank, df_rev = load_cached_datasets()
+    con = duckdb.connect(database=':memory:')
+    
+    if not df_desc.empty:
+        con.register('games_desc', df_desc)
+    else:
+        con.execute("CREATE TABLE games_desc (name VARCHAR, genres VARCHAR, publisher VARCHAR, number_of_reviews_from_purchased_people_clean BIGINT)")
+        
+    if not df_rank.empty:
+        con.register('games_rank', df_rank)
+    else:
+        con.execute("CREATE TABLE games_rank (game_name VARCHAR, normalized_game_name VARCHAR, title_classification VARCHAR, rank_type VARCHAR, rank_clean DOUBLE)")
+
+    if not df_rev.empty:
+        con.register('steam_reviews', df_rev)
     else:
         con.execute("""
             CREATE TABLE steam_reviews AS 
             SELECT 
                 d.name AS game_name,
+                d.name AS normalized_game_name,
                 'Absolute masterpiece of a game! Highly recommended.' AS review,
                 CAST((abs(hash(d.name)) % 160 + 5.0 + (r.r % 5)) AS DOUBLE) AS hours_played_clean,
                 CAST(abs(hash(d.name || r.r)) % 25 AS BIGINT) AS helpful_clean,
@@ -254,6 +278,16 @@ def get_duckdb_connection():
             CROSS JOIN (SELECT range AS r FROM range(100)) r
         """)
     return con
+
+def safe_scalar(con, query, default=0):
+    """Fail-safe helper to execute scalar DuckDB queries without raising TypeError."""
+    try:
+        res = con.execute(query).fetchone()
+        if res is not None and len(res) > 0 and res[0] is not None:
+            return res[0]
+    except Exception:
+        pass
+    return default
 
 @st.cache_resource
 def get_ml_pipeline():
@@ -285,11 +319,11 @@ PLOTLY_THEME = dict(
     margin=dict(l=10, r=10, t=30, b=10)
 )
 
-# Fetch Global Telemetry
-total_games = con.execute("SELECT COUNT(DISTINCT name) FROM games_desc").fetchone()[0]
-total_reviews = con.execute("SELECT COUNT(*) FROM steam_reviews").fetchone()[0]
-avg_recommend = con.execute("SELECT ROUND(AVG(is_recommended)*100, 1) FROM steam_reviews").fetchone()[0]
-avg_playtime = con.execute("SELECT ROUND(AVG(hours_played_clean), 1) FROM steam_reviews").fetchone()[0]
+# Fetch Global Telemetry safely
+total_games = safe_scalar(con, "SELECT COUNT(DISTINCT name) FROM games_desc", 0)
+total_reviews = safe_scalar(con, "SELECT COUNT(*) FROM steam_reviews", 0)
+avg_recommend = safe_scalar(con, "SELECT ROUND(AVG(is_recommended)*100, 1) FROM steam_reviews", 0.0)
+avg_playtime = safe_scalar(con, "SELECT ROUND(AVG(hours_played_clean), 1) FROM steam_reviews", 0.0)
 
 # -------------------------------------------------------------
 # 3. SIDEBAR NAVIGATION & STATUS PANEL
@@ -562,8 +596,8 @@ elif navigation == "🎮 Game Analytics":
                 badge_class = "badge-green" if row['rec_rate'] >= 80 else ("badge-amber" if row['rec_rate'] >= 60 else "badge-red")
                 st.markdown(f"""
                 <div class="game-card">
-                    <div style="height: 120px; background-color: #070B14; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #1E293B;">
-                        <img src="file:///d:/Video%20game%20project/assets/game_placeholder.png" style="max-height: 100px; opacity: 0.8;"/>
+                    <div style="height: 100px; background-color: #070B14; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #1E293B;">
+                        <div style="font-size: 2.2rem; color: #38BDF8;">🎮</div>
                     </div>
                     <div class="game-card-body">
                         <div style="font-weight: 700; color: #F8FAFC; font-size: 0.95rem; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{row['game_name']}</div>
@@ -660,12 +694,12 @@ elif navigation == "💬 Review Intelligence":
     st.markdown("<div class='page-title'>REVIEW INTELLIGENCE</div>", unsafe_allow_html=True)
     st.markdown("<div class='page-subtitle'>Deep dive into review sentiment distributions, player feedback length, and engagement correlations.</div>", unsafe_allow_html=True)
 
-    # Metrics Row
-    pos_reviews = con.execute("SELECT COUNT(*) FROM steam_reviews WHERE is_recommended = 1").fetchone()[0]
-    neg_reviews = con.execute("SELECT COUNT(*) FROM steam_reviews WHERE is_recommended = 0").fetchone()[0]
-    pos_pct = round((pos_reviews / total_reviews) * 100, 1)
-    neg_pct = round((neg_reviews / total_reviews) * 100, 1)
-    avg_words = con.execute("SELECT ROUND(AVG(review_word_count), 1) FROM steam_reviews").fetchone()[0]
+    # Metrics Row safely queried
+    pos_reviews = safe_scalar(con, "SELECT COUNT(*) FROM steam_reviews WHERE is_recommended = 1", 0)
+    neg_reviews = safe_scalar(con, "SELECT COUNT(*) FROM steam_reviews WHERE is_recommended = 0", 0)
+    pos_pct = round((pos_reviews / max(total_reviews, 1)) * 100, 1)
+    neg_pct = round((neg_reviews / max(total_reviews, 1)) * 100, 1)
+    avg_words = safe_scalar(con, "SELECT ROUND(AVG(review_word_count), 1) FROM steam_reviews", 0.0)
 
     col1, col2, col3, col4 = st.columns(4)
     with col1:
