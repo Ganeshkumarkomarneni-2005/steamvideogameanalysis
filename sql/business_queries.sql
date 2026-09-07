@@ -76,7 +76,7 @@ LIMIT 25;
 
 -- 3. Publisher Portfolio Concentration & Player Reception Summary
 SELECT 
-    COALESCE(publisher, 'Unknown Publisher') AS publisher,
+    trim(replace(replace(replace(COALESCE(publisher, 'Unknown Publisher'), '[', ''), ']', ''), '''', '')) AS publisher,
     COUNT(DISTINCT name) AS total_published_games,
     SUM(number_of_reviews_from_purchased_people_clean) AS total_portfolio_reviews,
     ROUND(AVG(number_of_reviews_from_purchased_people_clean), 0) AS avg_reviews_per_game,
