@@ -130,7 +130,7 @@ User Question: {question}
             FROM games_desc GROUP BY publisher HAVING COUNT(DISTINCT name) >= 2 ORDER BY total_reviews DESC LIMIT 10;
             """
             engine_type = "Schema Engine (Publisher Analysis)"
-        elif 'divergence' in q or 'sales' in q or 'rank' in q or 'gem' in q or 'friction' in q:
+        elif 'divergence' in q or 'rank' in q or 'gem' in q or 'friction' in q:
             sql = """
             WITH rank_pivoted AS (
                 SELECT game_name, normalized_game_name, title_classification,
@@ -142,6 +142,18 @@ User Question: {question}
             FROM rank_pivoted WHERE sales_rank IS NOT NULL AND review_rank IS NOT NULL ORDER BY ABS(sales_rank - review_rank) DESC LIMIT 15;
             """
             engine_type = "Schema Engine (Rank Divergence)"
+        elif 'profit' in q or 'revenue' in q or 'commercial' in q or 'sales' in q or 'grossing' in q:
+            sql = """
+            WITH rank_pivoted AS (
+                SELECT game_name, normalized_game_name, title_classification,
+                    MAX(CASE WHEN rank_type = 'Sales' THEN rank_clean END) AS sales_rank,
+                    MAX(CASE WHEN rank_type = 'Review' THEN rank_clean END) AS review_rank
+                FROM games_rank GROUP BY game_name, normalized_game_name, title_classification
+            )
+            SELECT game_name, title_classification, sales_rank AS top_commercial_sales_rank, review_rank
+            FROM rank_pivoted WHERE sales_rank IS NOT NULL ORDER BY sales_rank ASC LIMIT 10;
+            """
+            engine_type = "Schema Engine (Commercial & Sales Performance)"
         elif ('recommended' in q or 'word' in q) and ('vs' in q or 'non' in q or 'compare' in q or 'difference' in q):
             sql = """
             SELECT 
