@@ -305,8 +305,18 @@ def get_ai_agent(_con):
 
 
 
-con = get_duckdb_connection()
-ml_pipeline = get_ml_pipeline()
+try:
+    con = get_duckdb_connection()
+except Exception as e:
+    st.error(f"⚠️ Database initialization error: {e}")
+    con = duckdb.connect(database=':memory:')
+
+try:
+    ml_pipeline = get_ml_pipeline()
+except Exception as e:
+    st.warning(f"⚠️ ML Pipeline loading warning: {e}")
+    ml_pipeline = None
+
 
 # Plotly Unified Theme Matrix
 PLOTLY_THEME = dict(
