@@ -130,7 +130,7 @@ User Question: {question}
             FROM games_desc GROUP BY publisher HAVING COUNT(DISTINCT name) >= 2 ORDER BY total_reviews DESC LIMIT 10;
             """
             engine_type = "Schema Engine (Publisher Analysis)"
-        elif 'divergence' in q or 'sales' in q or 'rank' in q or 'gem' in q:
+        elif 'divergence' in q or 'sales' in q or 'rank' in q or 'gem' in q or 'friction' in q:
             sql = """
             WITH rank_pivoted AS (
                 SELECT game_name, normalized_game_name, title_classification,
@@ -142,6 +142,43 @@ User Question: {question}
             FROM rank_pivoted WHERE sales_rank IS NOT NULL AND review_rank IS NOT NULL ORDER BY ABS(sales_rank - review_rank) DESC LIMIT 15;
             """
             engine_type = "Schema Engine (Rank Divergence)"
+        elif ('recommended' in q or 'word' in q) and ('vs' in q or 'non' in q or 'compare' in q or 'difference' in q):
+            sql = """
+            SELECT 
+                CASE WHEN is_recommended = 1 THEN 'Recommended' ELSE 'Not Recommended' END AS sentiment_status,
+                COUNT(*) AS total_reviews_analyzed,
+                ROUND(AVG(hours_played_clean), 1) AS avg_hours_played,
+                ROUND(AVG(review_word_count), 1) AS avg_word_count,
+                ROUND(AVG(review_char_len), 1) AS avg_character_length
+            FROM steam_reviews
+            GROUP BY is_recommended ORDER BY is_recommended DESC;
+            """
+            engine_type = "Schema Engine (Sentiment Telemetry Comparison)"
+        elif 'exceed' in q or '100' in q or 'high retention' in q or '80%' in q:
+            sql = """
+            SELECT 
+                game_name, 
+                COUNT(*) AS total_reviews_analyzed, 
+                ROUND(AVG(hours_played_clean), 1) AS avg_hours_played,
+                ROUND(AVG(is_recommended) * 100, 2) AS recommendation_pct
+            FROM steam_reviews 
+            GROUP BY game_name 
+            HAVING AVG(hours_played_clean) >= 50 AND AVG(is_recommended) >= 0.70 
+            ORDER BY avg_hours_played DESC LIMIT 10;
+            """
+            engine_type = "Schema Engine (High Retention & High Satisfaction)"
+        elif 'helpful' in q or 'vote' in q or 'community' in q:
+            sql = """
+            SELECT 
+                game_name, 
+                SUM(helpful_clean) AS total_helpful_votes,
+                COUNT(*) AS total_reviews_analyzed,
+                ROUND(AVG(is_recommended) * 100, 2) AS recommendation_pct
+            FROM steam_reviews 
+            GROUP BY game_name 
+            ORDER BY total_helpful_votes DESC LIMIT 10;
+            """
+            engine_type = "Schema Engine (Helpful Telemetry)"
         elif 'hour' in q or 'playtime' in q or 'played' in q:
             sql = """
             SELECT game_name, COUNT(*) AS total_reviews_analyzed, 
