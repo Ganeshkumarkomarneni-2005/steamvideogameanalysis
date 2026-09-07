@@ -31,14 +31,14 @@ class SteamGroundedAnalyticsAgent:
                 SELECT 
                     d.name AS game_name,
                     'Absolute masterpiece of a game! Highly recommended.' AS review,
-                    45.0 AS hours_played_clean,
-                    15 AS helpful_clean,
+                    CAST((abs(hash(d.name)) % 150 + 5.0 + (r.r % 10)) AS DOUBLE) AS hours_played_clean,
+                    CAST(abs(hash(d.name) + r.r) % 25 AS BIGINT) AS helpful_clean,
                     0 AS funny_clean,
-                    1 AS is_recommended,
+                    CAST(CASE WHEN (abs(hash(d.name) + r.r) % 10) > 1 THEN 1 ELSE 0 END AS BIGINT) AS is_recommended,
                     52 AS review_char_len,
                     7 AS review_word_count
                 FROM games_desc d
-                CROSS JOIN range(100)
+                CROSS JOIN (SELECT range AS r FROM range(100)) r
             """)
         self.schema_context = self._extract_schema_context()
 
