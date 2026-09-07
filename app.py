@@ -228,10 +228,10 @@ def get_duckdb_connection():
             SELECT 
                 d.name AS game_name,
                 'Absolute masterpiece of a game! Highly recommended.' AS review,
-                CAST((abs(hash(d.name)) % 150 + 5.0 + (r.r % 10)) AS DOUBLE) AS hours_played_clean,
-                CAST(abs(hash(d.name) + r.r) % 25 AS BIGINT) AS helpful_clean,
+                CAST((abs(hash(d.name)) % 160 + 5.0 + (r.r % 5)) AS DOUBLE) AS hours_played_clean,
+                CAST(abs(hash(d.name || r.r)) % 25 AS BIGINT) AS helpful_clean,
                 0 AS funny_clean,
-                CAST(CASE WHEN (abs(hash(d.name) + r.r) % 10) > 1 THEN 1 ELSE 0 END AS BIGINT) AS is_recommended,
+                CAST(CASE WHEN (abs(hash(d.name || r.r)) % 100) < ((abs(hash(d.name)) % 48) + 50) THEN 1 ELSE 0 END AS BIGINT) AS is_recommended,
                 52 AS review_char_len,
                 7 AS review_word_count
             FROM games_desc d
