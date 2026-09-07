@@ -378,7 +378,7 @@ python scripts/04_ai_analytics_agent.py
 
 ## 👨‍💻 23. Role
 
-**Lead Data Engineer & AI/ML Developer**
+**Student**
 - Designed and implemented the Gaming Intelligence Noir UI design system in Streamlit.
 - Built the DuckDB in-memory analytical backend and ETL pipeline.
 - Developed, benchmarked, and validated the Scikit-Learn Logistic Regression model pipeline.
