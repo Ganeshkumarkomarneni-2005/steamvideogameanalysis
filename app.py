@@ -303,7 +303,6 @@ def get_ml_pipeline():
         return joblib.load(model_path)
     return None
 
-@st.cache_resource
 def get_ai_agent(_con):
     spec = importlib.util.spec_from_file_location("ai_agent_module", "scripts/04_ai_analytics_agent.py")
     ai_agent_module = importlib.util.module_from_spec(spec)
