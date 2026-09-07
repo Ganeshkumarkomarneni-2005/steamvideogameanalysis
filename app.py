@@ -13,6 +13,24 @@ import plotly.graph_objects as go
 import joblib
 import streamlit as st
 import importlib.util
+import base64
+
+@st.cache_data
+def get_base64_placeholder():
+    path = 'assets/game_placeholder.png'
+    if os.path.exists(path):
+        with open(path, "rb") as f:
+            return f"data:image/png;base64,{base64.b64encode(f.read()).decode()}"
+    return ""
+
+def extract_steam_appid(link_str):
+    if pd.isna(link_str) or not link_str:
+        return None
+    match = re.search(r'/app/(\d+)', str(link_str))
+    if match:
+        return match.group(1)
+    return None
+
 
 # -------------------------------------------------------------
 # 1. PAGE CONFIGURATION & GAMING INTELLIGENCE NOIR THEME SYSTEM
@@ -568,6 +586,7 @@ elif navigation == "🎮 Game Analytics":
     df_filtered_games = con.execute(f"""
         SELECT 
             r.game_name,
+            MAX(d.link) AS link,
             COUNT(*) AS total_reviews,
             ROUND(AVG(r.is_recommended) * 100, 1) AS rec_rate,
             ROUND(AVG(r.hours_played_clean), 1) AS avg_hours
@@ -590,14 +609,21 @@ elif navigation == "🎮 Game Analytics":
         </div>
         """, unsafe_allow_html=True)
     else:
+        b64_placeholder = get_base64_placeholder()
         g_cols = st.columns(3)
         for idx, row in df_filtered_games.iterrows():
             with g_cols[idx % 3]:
+                app_id = extract_steam_appid(row.get('link'))
+                if app_id:
+                    img_src = f"https://cdn.cloudflare.steamstatic.com/steam/apps/{app_id}/header.jpg"
+                else:
+                    img_src = b64_placeholder
+
                 badge_class = "badge-green" if row['rec_rate'] >= 80 else ("badge-amber" if row['rec_rate'] >= 60 else "badge-red")
                 st.markdown(f"""
                 <div class="game-card">
-                    <div style="height: 100px; background-color: #070B14; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #1E293B;">
-                        <div style="font-size: 2.2rem; color: #38BDF8;">🎮</div>
+                    <div style="height: 125px; background-color: #070B14; overflow: hidden; border-bottom: 1px solid #1E293B; display: flex; align-items: center; justify-content: center;">
+                        <img src="{img_src}" style="width: 100%; height: 125px; object-fit: cover;" onerror="this.onerror=null; this.src='{b64_placeholder}';"/>
                     </div>
                     <div class="game-card-body">
                         <div style="font-weight: 700; color: #F8FAFC; font-size: 0.95rem; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{row['game_name']}</div>
@@ -609,6 +635,7 @@ elif navigation == "🎮 Game Analytics":
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
+
 
     # Detailed Charts
     c_ga1, c_ga2 = st.columns(2)
