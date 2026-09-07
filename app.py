@@ -213,6 +213,7 @@ def get_duckdb_connection():
     desc_path = 'data/processed/games_description_clean.csv'
     rank_path = 'data/processed/games_ranking_clean.csv'
     rev_path = 'data/processed/steam_game_reviews_clean.csv'
+    cloud_rev_path = 'data/processed/steam_reviews_cloud.csv'
     
     con = duckdb.connect(database=':memory:')
     if os.path.exists(desc_path):
@@ -222,6 +223,8 @@ def get_duckdb_connection():
         
     if os.path.exists(rev_path):
         con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [rev_path])
+    elif os.path.exists(cloud_rev_path):
+        con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [cloud_rev_path])
     else:
         con.execute("""
             CREATE TABLE steam_reviews AS 

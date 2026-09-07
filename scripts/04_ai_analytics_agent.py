@@ -17,6 +17,7 @@ class SteamGroundedAnalyticsAgent:
     to parse natural language questions into safe, executable read-only SQL queries.
     """
     def __init__(self, desc_path, rank_path, rev_path):
+        cloud_rev_path = 'data/processed/steam_reviews_cloud.csv'
         self.con = duckdb.connect(database=':memory:')
         if os.path.exists(desc_path):
             self.con.execute("CREATE TABLE games_desc AS SELECT * FROM read_csv_auto(?)", [desc_path])
@@ -25,6 +26,8 @@ class SteamGroundedAnalyticsAgent:
             
         if os.path.exists(rev_path):
             self.con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [rev_path])
+        elif os.path.exists(cloud_rev_path):
+            self.con.execute("CREATE TABLE steam_reviews AS SELECT * FROM read_csv_auto(?)", [cloud_rev_path])
         else:
             self.con.execute("""
                 CREATE TABLE steam_reviews AS 
